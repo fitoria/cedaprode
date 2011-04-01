@@ -2,3 +2,4 @@
 *.log
 files/media/*
 *.pyc
+settings_local.py

@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block title%}Formulario{%endblock%}
+{%block content%}
+<form action="." method="POST" accept-charset="utf-8">
+  {{ formset.management_form }}
+  {% for form in formset %}
+    {{form}}
+  {% endfor %}
+<p><input type="submit" value="Continue &rarr;"></p>
+</form>
+{%endblock%}

@@ -8,7 +8,7 @@ class RespuestaInlineForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RespuestaInlineForm, self).__init__(*args, **kwargs)
-        self.fields['respuesta'] = forms.ModelChoiceField(queryset = Opcion.objects.filter(pregunta=self.instance), 
+        self.fields['respuesta'] = forms.ModelChoiceField(queryset = Opcion.objects.filter(pregunta=self.instance.pregunta), 
                                       widget=forms.RadioSelect(), empty_label=None)
     
     class Meta:

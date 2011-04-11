@@ -1,18 +1,43 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.forms.models import inlineformset_factory
+from django.template import RequestContext
+from forms import * 
+from decorators import checar_permiso
 from models import *
 
-def formulario(request, encuesta_id):
+@login_required
+@checar_permiso
+def llenar_encuesta(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk = encuesta_id)
     preguntas = Pregunta.objects.all()
-    PreguntaInlineFormSet = inlineformset_factory(Encuesta, Respuesta, can_delete=False)
+    PreguntaInlineFormSet = inlineformset_factory(Encuesta, Respuesta, 
+                                                  form=RespuestaInlineForm, 
+                                                  can_delete=False,
+                                                  max_num=0)
     if request.method == 'POST':
-        formset = PreguntaInlineFormSet(request.POST, request.FILES)
+        formset = PreguntaInlineFormSet(request.POST, request.FILES, instance = encuesta)
         if formset.is_valid():
             formset.save()
         else:
-            formset = PreguntaInlineFormSet(instance = encuesta)
+            formset = PreguntaInlineFormSet(request.POST, instance = encuesta)
     else:
         formset = PreguntaInlineFormSet(instance=encuesta)
-    return render_to_response('encuesta/formulario.html', {'formset': formset})
+    return render_to_response('encuesta/llenar_encuesta.html', 
+            {'formset': formset}, 
+            context_instance=RequestContext(request))
+
+@login_required
+def crear_encuesta(request):
+    encuesta = Encuesta(usuario=request.user)
+    if request.method == 'POST':
+        form = EncuestaForm(request.POST)
+        if form.is_valid():
+            encuesta = form.save(commit=False)
+            encuesta.save()
+            return redirect('llenar-encuesta', encuesta_id = encuesta.id)
+    else:
+        form = EncuestaForm(instance=encuesta)
+    return render_to_response('encuesta/crear_encuesta.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))

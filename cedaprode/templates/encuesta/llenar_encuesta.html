@@ -2,9 +2,15 @@
 {%block title%}Formulario{%endblock%}
 {%block content%}
 <form action="." method="POST" accept-charset="utf-8">
+  {% csrf_token %}
   {{ formset.management_form }}
   {% for form in formset %}
-    {{form}}
+    {{form.pregunta}}
+    {{form.id}}
+    {{form.instance.pregunta.titulo}}
+    {{form.respuesta}}
+    {{form.instance.pregunta.texto_explicativo}}: {{form.comentario}}
+    {{form.errors}}
   {% endfor %}
 <p><input type="submit" value="Continue &rarr;"></p>
 </form>

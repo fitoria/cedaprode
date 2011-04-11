@@ -3,3 +3,5 @@
 files/media/*
 *.pyc
 settings_local.py
+*sqlite3
+*sqlite3.bk

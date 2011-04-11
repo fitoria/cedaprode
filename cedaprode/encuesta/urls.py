@@ -3,5 +3,6 @@ from django.conf import settings
 
 
 urlpatterns = patterns('encuesta.views',
-            (r'^formulario/(?P<encuesta_id>\d+)/$', 'formulario'),
+            url(r'^llenar-encuesta/(?P<encuesta_id>\d+)/$', 'llenar_encuesta', name='llenar-encuesta'),
+            url(r'^crear-encuesta/$', 'crear_encuesta', name='crear-encuesta'),
             )

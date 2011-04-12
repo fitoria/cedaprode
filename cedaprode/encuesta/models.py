@@ -10,6 +10,8 @@ class Organizacion(models.Model):
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=2, choices = TIPOS_ORG)
     descripcion = models.TextField() 
+    creado_por = models.ForeignKey(User)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     #logo =  
     #departamento = models.ForeignKey(Departamento)
 

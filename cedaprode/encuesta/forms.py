@@ -9,7 +9,7 @@ class RespuestaInlineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RespuestaInlineForm, self).__init__(*args, **kwargs)
         self.fields['respuesta'] = forms.ModelChoiceField(queryset = Opcion.objects.filter(pregunta=self.instance.pregunta), 
-                                      widget=forms.RadioSelect(), empty_label=None)
+                                      widget=forms.RadioSelect(), empty_label=None, required=False)
     
     class Meta:
         model = Respuesta
@@ -17,5 +17,17 @@ class RespuestaInlineForm(forms.ModelForm):
 class EncuestaForm(forms.ModelForm):
     usuario = forms.ModelChoiceField(queryset = User.objects.all(),
                                      widget=forms.HiddenInput)
+
+    def __init__(self, *args, **kwargs):
+        super(EncuestaForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            self.fields['organizacion'] = forms.ModelChoiceField(queryset = Organizacion.objects.filter(creado_por=self.instance.creado_por))
+    
     class Meta:
         model = Encuesta
+
+class OrganizacionForm(forms.ModelForm):
+    creado_por = forms.ModelChoiceField(queryset = User.objects.all(),
+                                     widget=forms.HiddenInput)
+    class Meta:
+        model = Organizacion

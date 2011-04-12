@@ -31,7 +31,7 @@ def llenar_encuesta(request, encuesta_id):
 def crear_encuesta(request):
     encuesta = Encuesta(usuario=request.user)
     if request.method == 'POST':
-        form = EncuestaForm(request.POST)
+        form = EncuestaForm(request.POST, instance=encuesta)
         if form.is_valid():
             encuesta = form.save(commit=False)
             encuesta.save()
@@ -39,5 +39,20 @@ def crear_encuesta(request):
     else:
         form = EncuestaForm(instance=encuesta)
     return render_to_response('encuesta/crear_encuesta.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def crear_organizacion(request):
+    organizacion = Organizacion(creado_por=request.user)
+    if request.method == 'POST':
+        form = OrganizacionForm(request.POST, instance=organizacion)
+        if form.is_valid():
+            organizacion = form.save(commit=False)
+            organizacion.save()
+            #return redirect('llenar-encuesta', encuesta_id = encuesta.id)
+    else:
+        form = OrganizacionForm(instance=organizacion)
+    return render_to_response('encuesta/crear_organizacion.html',
                               {'form': form},
                               context_instance=RequestContext(request))

@@ -21,7 +21,7 @@ class EncuestaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EncuestaForm, self).__init__(*args, **kwargs)
         if self.instance:
-            self.fields['organizacion'] = forms.ModelChoiceField(queryset = Organizacion.objects.filter(creado_por=self.instance.creado_por))
+            self.fields['organizacion'] = forms.ModelChoiceField(queryset = Organizacion.objects.filter(creado_por=self.instance.usuario))
     
     class Meta:
         model = Encuesta

@@ -1,6 +1,9 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+#from thumbs import ImageWithThumbsField
+
+from lugar.models import Municipio
 
 TIPOS_ORG = (('1', 'Alcaldía'), ('2', 'Sociedad civil'),
             ('3', 'Gremios'), ('4', 'Instituciones del estado'), 
@@ -12,8 +15,8 @@ class Organizacion(models.Model):
     descripcion = models.TextField() 
     creado_por = models.ForeignKey(User)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    #logo =  
-    #departamento = models.ForeignKey(Departamento)
+    municipio = models.ForeignKey(Municipio)
+    #logo = ImageWithThumbsField(upload_to = 'logos', sizes = ((100, 100))) 
 
     class Meta:
         verbose_name_plural = 'Organizaciones'

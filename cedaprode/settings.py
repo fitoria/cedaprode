@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'encuesta',
     'south',
+    'lugar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -117,3 +118,5 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_REDIRECT_URL = '/'

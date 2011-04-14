@@ -2,9 +2,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-TIPOS_ORG = (('1', 'alcaldía'), ('2', 'sociedad civil'),
-            ('3', 'gremios'), ('4', 'instituciones del estado'), 
-            ('5', 'empresa'))
+TIPOS_ORG = (('1', 'Alcaldía'), ('2', 'Sociedad civil'),
+            ('3', 'Gremios'), ('4', 'Instituciones del estado'), 
+            ('5', 'Empresa'))
 
 class Organizacion(models.Model):
     nombre = models.CharField(max_length=100)
@@ -53,15 +53,14 @@ class Categoria(models.Model):
 
 class Pregunta(models.Model):
     categoria = models.ForeignKey(Categoria)
-    titulo = models.CharField(max_length=200)
-    texto_explicativo = models.TextField()
+    titulo = models.TextField()
 
     def __unicode__(self):
         return self.titulo
 
 class Opcion(models.Model):
     pregunta = models.ForeignKey(Pregunta)
-    titulo = models.CharField(max_length=200)
+    titulo = models.TextField()
     puntaje = models.PositiveIntegerField()
 
     class Meta:

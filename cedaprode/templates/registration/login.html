@@ -2,9 +2,11 @@
 {%load url from future%}
 
 {% block content %}
+<div class="margen">
 
+<div class="titulo-general">INICIAR SESION</div>
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<div class="warning">Su usuario o contraseña son invalidos, favor intente de nuevo</div>
 {% endif %}
 
 <form method="post" action="{% url 'user-login' %}">
@@ -12,10 +14,14 @@
 <table>
 <tr>
     <td>{{ form.username.label_tag }}</td>
+</tr>
+<tr>
     <td>{{ form.username }}</td>
 </tr>
 <tr>
     <td>{{ form.password.label_tag }}</td>
+</tr>
+<tr>
     <td>{{ form.password }}</td>
 </tr>
 </table>
@@ -23,5 +29,6 @@
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+</div>
 
 {% endblock %}

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href="/files/css/estilo.css" rel="stylesheet" type="text/css" media="screen" />
+    <title>{%block title%}{%endblock%}</title>
+    {%block extra_head%}{%endblock%}
+  </head>
+  <body>
+    <div id ="marco">
+        <div id="sidebar">
+            <div id="logo">
+                <div id="menuside">
+                    <a href="/"><img src="/files/imagen/home.png">   Inicio</a>
+                    <a href="/account/logouot"><img src="/files/imagen/out.png">   Salir</a>
+                </div>
+            </div>
+        </div>
+        <div id="cuerpo">
+            <div id="panel" style="height:90px !important;">
+                   </br>
+                   <img class="izq" src="/files/imagen/organizacionboton.jpg"></img>
+                   <a href="/crear-encuesta/"><img class="izq" style="margin-left:-8px;"src="/files/imagen/evaluacionboton.jpg"></a>
+                   <img class="izq" style="margin-left:-8px;"src="/files/imagen/explorarboton.jpg"></img>
+                   <img class="izq"style="margin-left:-8px;" src="/files/imagen/ayudaboton.jpg"></img>
+                   <div class="separador"></div>
+            </div>
+            {%block content%}
+            {%endblock%}
+        </div>
+        <div class="separador"></div>
+    </div>
+  </body>
+</html>

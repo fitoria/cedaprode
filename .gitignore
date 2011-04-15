@@ -5,3 +5,9 @@ files/media/*
 settings_local.py
 *sqlite3
 *sqlite3.bk
+.project
+*.py~
+*.db
+*.swp
+/media/profile/*.*
+/static_media/attachments/

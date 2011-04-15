@@ -1,0 +1,56 @@
+/* Reset */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote,
+a, font, img, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration:none;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+
+:focus {
+    outline: 0;
+}
+/* // Reset */
+
+/* generales */
+
+body{
+    background:#f5f6f6 url(/files/imagen/fondo.png) repeat-y;
+}
+
+.izq{float:left;}
+.der{float:right;}
+.separador{clear:both;}
+
+#marco{
+    width:960px;
+    background:yellow;
+}
+
+#sidebar{
+    width:239px;
+    float:left;
+}
+
+#cuerpo{
+    background:red;
+    width:720px;
+    float:left;
+}
+
+#logo{
+    widht:239px;
+    height:120px;
+    background:url(/files/imagen/logo.jpg) no-repeat;
+    border-bottom:#88cbff solid 1px;
+}

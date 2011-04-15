@@ -1,13 +1,28 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  
+    <link href="/files/css/estilo.css" rel="stylesheet" type="text/css" media="screen" />
     <title>{%block title%}{%endblock%}</title>
     {%block extra_head%}{%endblock%}
-    
+
   </head>
   <body>
-    {%block content%}
-    {%endblock%}
+    <div id ="marco">
+        <div id="sidebar">
+            <div id="logo">
+            </div>
+        </div>
+        <div id="cuerpo">
+            <div id="panel">
+                <div class="margen">
+                    Sistema de información en linea para el monitoreo de plan de trabajo de fortalecimiento organizacional para mejorar la gestión ambiental de manejo de la cuenca compartida del río Coco, basado en la propuesta de monitoreo desarrollado por CEDAPRODE y aprobado por UNOPS
+                </div>
+            </div>
+            {%block content%}
+            {%endblock%}
+        </div>
+        <div class="separador"></div>
+    </div>
   </body>
 </html>

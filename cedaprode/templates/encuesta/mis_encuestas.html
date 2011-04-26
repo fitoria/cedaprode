@@ -1,0 +1,12 @@
+{% extends "base2.html" %}
+{%block title%}Mis Encuestas{%endblock%}
+{% block content %}
+
+<h1><a href="{% url crear-encuesta%}">Crear Encuesta</a></h1>
+<h2>Mis Encuestas</h2>
+<ul>
+{% for encuesta in encuestas%}
+  <li>{{ encuesta }}| <a href="#">Ver</a> | <a href="{% url llenar-encuesta encuesta.id %}">Editar</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

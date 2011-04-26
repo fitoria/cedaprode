@@ -5,6 +5,7 @@ from models import Organizacion
 
 
 urlpatterns = patterns('encuesta.views',
+            url(r'^mis-encuestas/$', 'mis_encuestas', name='mis-encuestas'),
             url(r'^llenar-encuesta/(?P<encuesta_id>\d+)/$', 'llenar_encuesta', name='llenar-encuesta'),
             url(r'^crear-encuesta/$', 'crear_encuesta', name='crear-encuesta'),
             url(r'^crear-organizacion/$', 'crear_organizacion', name='crear-organizacion'),
@@ -13,6 +14,6 @@ urlpatterns = patterns('encuesta.views',
             url(r'^organizacion/(?P<pk>\d+)/$', 
                 DetailView.as_view(model=Organizacion, template_name='encuesta/organizacion.html'), 
                 name='organizacion-detalle'),
-            url(r'^inicio/$', 'inicio'),
+            url(r'^inicio/$', 'inicio', name='inicio'),
             url(r'^$', 'index'),
             )

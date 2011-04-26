@@ -8,7 +8,10 @@ from decorators import checar_permiso
 from models import *
 
 def index(request):
-    return redirect('user-login')
+    if request.user.is_authenticated():
+        return redirect('inicio')
+    else:
+        return redirect('user-login')
 
 @login_required
 def inicio(request):
@@ -58,7 +61,7 @@ def crear_organizacion(request):
         if form.is_valid():
             organizacion = form.save(commit=False)
             organizacion.save()
-            #return redirect('llenar-encuesta', encuesta_id = encuesta.id)
+            return redirect('organizacion', pk=organizacion.id)
     else:
         form = OrganizacionForm(instance=organizacion)
     return render_to_response('encuesta/crear_organizacion.html',
@@ -78,4 +81,10 @@ def editar_organizacion(request, organizacion_id):
         form = OrganizacionForm(instance=organizacion)
     return render_to_response('encuesta/editar_organizacion.html',
                               {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def mis_encuestas(request):
+    encuestas = Encuesta.objects.filter(usuario = request.user)
+    return render_to_response('encuesta/mis_encuestas.html', {'encuestas': encuestas},
                               context_instance=RequestContext(request))

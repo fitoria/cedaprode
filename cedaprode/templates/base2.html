@@ -12,15 +12,15 @@
             <div id="logo">
                 <div id="menuside">
                     <a href="/"><img src="/files/imagen/home.png">   Inicio</a>
-                    <a href="/account/logouot"><img src="/files/imagen/out.png">   Salir</a>
+                    <a href="{% url user-logout %}"><img src="/files/imagen/out.png">   Salir</a>
                 </div>
             </div>
         </div>
         <div id="cuerpo">
             <div id="panel" style="height:90px !important;">
                    </br>
-                   <a href="/crear-organizacion/"><img class="izq" src="/files/imagen/organizacionboton.jpg"></img></a>
-                   <a href="/crear-encuesta/"><img class="izq" style="margin-left:-8px;"src="/files/imagen/evaluacionboton.jpg"></a>
+                   <a href="{% url organizaciones %}"><img class="izq" src="/files/imagen/organizacionboton.jpg"></img></a>
+                   <a href="{% url crear-encuesta %}"><img class="izq" style="margin-left:-8px;"src="/files/imagen/evaluacionboton.jpg"></a>
                    <img class="izq" style="margin-left:-8px;"src="/files/imagen/explorarboton.jpg"></img>
                    <img class="izq"style="margin-left:-8px;" src="/files/imagen/ayudaboton.jpg"></img>
                    <div class="separador"></div>

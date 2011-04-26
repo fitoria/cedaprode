@@ -1,0 +1,9 @@
+{% extends "base2.html" %}
+{%block title%}Organizacion{%endblock%}
+{% block content %}
+
+<h1><a href="{% url crear-organizacion%}">Crear Organizacion</a></h1>
+<h1><a href="{% url organizaciones %}">Lista de orgs</a></h1>
+<h1><a href="{% url editar-organizacion object.id %}">Editar</a></h1>
+<h2>{{object.nombre}}</h2>
+{% endblock %}

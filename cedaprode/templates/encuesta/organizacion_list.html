@@ -1,0 +1,12 @@
+{% extends "base2.html" %}
+{%block title%}Organizaciones{%endblock%}
+{% block content %}
+
+<h1><a href="{% url crear-organizacion%}">Crear Organizacion</a></h1>
+<h2>Organizaciones</h2>
+<ul>
+{% for organizacion in object_list %}
+  <li>{{ organizacion.nombre }} | <a href="{% url organizacion-detalle organizacion.id %}">Ver</a> | <a href="{% url editar-organizacion organizacion.id %}">Editar</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

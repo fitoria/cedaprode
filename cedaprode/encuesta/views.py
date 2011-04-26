@@ -7,6 +7,9 @@ from forms import *
 from decorators import checar_permiso
 from models import *
 
+def index(request):
+    return redirect('user-login')
+
 @login_required
 def inicio(request):
     return direct_to_template(request, 'index.html')
@@ -59,5 +62,20 @@ def crear_organizacion(request):
     else:
         form = OrganizacionForm(instance=organizacion)
     return render_to_response('encuesta/crear_organizacion.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
+@login_required
+def editar_organizacion(request, organizacion_id):
+    organizacion = get_object_or_404(Organizacion, creado_por=request.user, pk=organizacion_id)
+    if request.method == 'POST':
+        form = OrganizacionForm(request.POST, instance=organizacion)
+        if form.is_valid():
+            organizacion = form.save(commit=False)
+            organizacion.save()
+            return redirect('organizaciones')
+    else:
+        form = OrganizacionForm(instance=organizacion)
+    return render_to_response('encuesta/editar_organizacion.html',
                               {'form': form},
                               context_instance=RequestContext(request))

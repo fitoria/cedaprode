@@ -1,11 +1,14 @@
+# -*- coding: UTF-8 -*-
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 from django.forms.models import inlineformset_factory
 from django.template import RequestContext
+from django.db.models import Sum
 from forms import *
 from decorators import checar_permiso
 from models import *
+from utils import generar_grafo
 
 def index(request):
     if request.user.is_authenticated():
@@ -87,4 +90,27 @@ def editar_organizacion(request, organizacion_id):
 def mis_encuestas(request):
     encuestas = Encuesta.objects.filter(usuario = request.user)
     return render_to_response('encuesta/mis_encuestas.html', {'encuestas': encuestas},
+                              context_instance=RequestContext(request))
+
+@login_required
+def resultado(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    #lista que tendra todos los resultados...
+    resultados = [] 
+    for categoria in Categoria.objects.all():
+        puntaje = Respuesta.objects.filter(encuesta=encuesta, 
+                                           pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
+        fila = {'categoria': categoria, 'puntaje': puntaje}
+        respuestas = []
+        for pregunta in Pregunta.objects.filter(categoria = categoria):
+            respuesta = Respuesta.objects.get(encuesta = encuesta, 
+                                                  pregunta = pregunta)
+            respuestas.append(respuesta)
+        grafo_url = generar_grafo(respuestas, categoria.titulo)
+        fila['respuestas'] = respuestas
+        fila['grafo_url'] = grafo_url 
+        resultados.append(fila)
+
+    return render_to_response('encuesta/resultado.html', 
+                              {'encuesta': encuesta, 'resultados': resultados},
                               context_instance=RequestContext(request))

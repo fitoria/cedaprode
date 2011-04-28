@@ -14,6 +14,7 @@ urlpatterns = patterns('encuesta.views',
             url(r'^organizacion/(?P<pk>\d+)/$', 
                 DetailView.as_view(model=Organizacion, template_name='encuesta/organizacion.html'), 
                 name='organizacion-detalle'),
+            url(r'^resultado/(?P<encuesta_id>\d+)/$', 'resultado', name='resultado'),
             url(r'^inicio/$', 'inicio', name='inicio'),
             url(r'^$', 'index'),
             )

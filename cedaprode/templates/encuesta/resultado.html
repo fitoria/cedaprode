@@ -1,0 +1,39 @@
+{% extends "base2.html" %}
+{%block title%}Resultado{%endblock%}
+{% block content %}
+  <h1>RESULTADO DE LA EVALUACION</H1>
+  <table border="0">
+    <tr>
+      <td>Organizacion</td>
+      <td>{{encuesta.organizacion}}</td>
+    </tr>
+    <tr>
+      <td>Tipo</td>
+      <td>{{encuesta.organizacion.tipo}}</td>
+    </tr>
+    <tr>
+      <td>Descripcion</td>
+      <td>{{encuesta.organizacion.descripcion}}</td>
+    </tr>
+    <tr>
+      <td>Fecha</td>
+      <td>{{encuesta.fecha}}</td>
+    </tr>
+  </table>
+  {%for fila in resultados%}
+  <div id="categoria-{{fila.categoria.id}}">
+    {{fila.categoria}}
+    <table border="1">
+      <tr><th>Pregunta</th><th>Puntaje Obtenido</th></tr>
+      {% for resp in fila.respuestas%}
+      <tr>
+        <td>{{resp.pregunta}}</td>
+        <td>{{resp.respuesta.puntaje}}</td>
+      </tr>
+    {%endfor%}
+      <tr><td>TOTAL</td><td>{{fila.puntaje}}</td></tr>
+    </table>
+    <div id="grafo-{{fila.categoria.id}}"><img src="{{fila.grafo_url}}" />
+  </div>
+  {%endfor%}
+{% endblock %}

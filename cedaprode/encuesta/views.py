@@ -109,6 +109,7 @@ def resultado(request, encuesta_id):
         grafo_url = generar_grafo(respuestas, categoria.titulo)
         fila['respuestas'] = respuestas
         fila['grafo_url'] = grafo_url 
+        fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
     return render_to_response('encuesta/resultado.html', 

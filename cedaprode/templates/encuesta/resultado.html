@@ -24,14 +24,15 @@
   <div id="categoria-{{fila.categoria.id}}">
     {{fila.categoria}}
     <table border="1">
-      <tr><th>Pregunta</th><th>Puntaje Obtenido</th></tr>
+      <tr><th>Pregunta</th><th>Puntaje Obtenido</th><th>Comentario</th></tr>
       {% for resp in fila.respuestas%}
       <tr>
         <td>{{resp.pregunta}}</td>
-        <td>{{resp.respuesta.puntaje}}</td>
+        <td>{{resp.respuesta.puntaje}}/5</td>
+        <td>{{resp.respuesta.comentario|truncatewords:"10"}}</td>
       </tr>
-    {%endfor%}
-      <tr><td>TOTAL</td><td>{{fila.puntaje}}</td></tr>
+      {%endfor%}
+      <tr><td>TOTAL</td><td>{{fila.puntaje}}/{{fila.total_maximo}}</td></tr>
     </table>
     <div id="grafo-{{fila.categoria.id}}"><img src="{{fila.grafo_url}}" />
   </div>

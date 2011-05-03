@@ -1,0 +1,11 @@
+{% extends "base2.html" %}
+{%block title%}Resultados{%endblock%}
+{% block content %}
+
+<h2>Resultados</h2>
+<ul>
+{% for encuesta in encuestas%}
+  <li>Encuesta a {{ encuesta.organizacion.nombre}} ({{encuesta.fecha}}) | <a href="{% url resultado encuesta.id %}">Ver</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

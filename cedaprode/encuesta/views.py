@@ -109,8 +109,15 @@ def resultado(request, encuesta_id):
         grafo_url = generar_grafo(respuestas, categoria.titulo)
         fila['respuestas'] = respuestas
         fila['grafo_url'] = grafo_url 
+        fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
     return render_to_response('encuesta/resultado.html', 
                               {'encuesta': encuesta, 'resultados': resultados},
+                              context_instance=RequestContext(request))
+@login_required
+def resultados(request):
+    encuestas = Encuesta.objects.filter(usuario = request.user)
+
+    return render_to_response('encuesta/resultados.html', {'encuestas': encuestas},
                               context_instance=RequestContext(request))

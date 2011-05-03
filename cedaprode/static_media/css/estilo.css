@@ -103,7 +103,7 @@ h2{
 
 /* Para formularios */
 
-#id_username, #id_password, #id_nombre, #id_tipo, #id_municipio{
+#id_username, #id_password, #id_nombre, #id_tipo, #id_municipio, #id_organizacion{
     width:450px;
     font-size:16px;
     background:#fff url(/files/imagen/fondotextfield.png) repeat-x;

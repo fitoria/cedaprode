@@ -1,4 +1,5 @@
 {% extends "base2.html" %}
+{% load clasificador%}
 {%block title%}Mis Encuestas{%endblock%}
 {% block content %}
 <div style="padding:15px;">
@@ -18,7 +19,7 @@
           {% for item in encuesta.list%}
           <tr>
           <td>{{ item.fecha }}</td>
-          <td>0 / 70 <img src="/files/imagen/amarillo.png"> <img src="/files/imagen/verde.png"> <img src="/files/imagen/azul.png"></td>
+          <td> {{item.puntaje}} / 180 <img src="{{ item.puntaje|clasificador }}"/></td>
           <td><a href="#">Ver</a> | <a href="">Editar</a></td>
           </tr>
           {% endfor %}

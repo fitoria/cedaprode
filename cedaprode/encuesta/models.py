@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum
 #from thumbs import ImageWithThumbsField
 
 from lugar.models import Municipio
@@ -42,6 +43,10 @@ class Encuesta(models.Model):
 
     def __unicode__(self):
         return 'Encuesta a %s con fecha %s' % (self.organizacion.nombre, self.fecha)
+    
+    def puntaje(self):
+        puntos = Respuesta.objects.filter(encuesta = self).aggregate(p=Sum('respuesta__puntaje'))['p']
+        return puntos 
 
 class Categoria(models.Model):
     '''Categoria principal'''

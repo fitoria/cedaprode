@@ -1,9 +1,33 @@
 {% extends "base2.html" %}
 {%block title%}Organizacion{%endblock%}
 {% block content %}
+<div style="padding:15px;">
+<a style="margin-left:7px; width:130px;display:block;" class="der" href="{% url crear-organizacion%}"><img  class="der" src="/files/imagen/nuev.jpg"></a>
+<a style="margin-left:7px; width:130px;display:block;" class="der" href="{% url organizaciones %}"><img class="der" src="/files/imagen/lista.jpg"></a>
+<a style="margin-left:7px; width:130px;display:block;" class="der" href="{% url editar-organizacion object.id %}"><img class="der" src="/files/imagen/editar.jpg"></a>
 
-<h1><a href="{% url crear-organizacion%}">Crear Organizacion</a></h1>
-<h1><a href="{% url organizaciones %}">Lista de orgs</a></h1>
-<h1><a href="{% url editar-organizacion object.id %}">Editar</a></h1>
-<h2>{{object.nombre}}</h2>
+<div class="separador"></div>
+<br>
+    <div class="tabla">
+             <table>
+
+              <tr>
+                  <td><b>Nombre</b></td>
+                  <td>{{ object }}</td>
+              </tr>
+              <tr>
+                  <td><b>Descripcion</b></td>
+                  <td>{{ object.descripcion }}</td>
+              </tr>
+              <tr>
+                  <td><b>Tipo</b></td>
+                  <td>{{ object.get_tipo_display }}</td>
+              </tr>
+              <tr>
+                  <td><b>Municipio</b></td>
+                  <td>{{ object.municipio }}</td>
+              </tr>
+             </table>
+    </div>
+</div>
 {% endblock %}

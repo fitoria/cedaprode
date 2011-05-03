@@ -64,7 +64,7 @@ def crear_organizacion(request):
         if form.is_valid():
             organizacion = form.save(commit=False)
             organizacion.save()
-            return redirect('organizacion', pk=organizacion.id)
+            return redirect('organizacion-detalle', pk=organizacion.id)
     else:
         form = OrganizacionForm(instance=organizacion)
     return render_to_response('encuesta/crear_organizacion.html',

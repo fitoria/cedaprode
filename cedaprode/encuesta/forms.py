@@ -29,5 +29,6 @@ class EncuestaForm(forms.ModelForm):
 class OrganizacionForm(forms.ModelForm):
     creado_por = forms.ModelChoiceField(queryset = User.objects.all(),
                                      widget=forms.HiddenInput)
+
     class Meta:
         model = Organizacion

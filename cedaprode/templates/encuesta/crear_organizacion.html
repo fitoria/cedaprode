@@ -4,6 +4,8 @@
 <div  style="padding:15px;">
 <form action="." method="POST" accept-charset="utf-8">
   {% csrf_token %}
+  {{form.errors}}
+  {{ form.creado_por }}
 <table>
 <tr>
     <td>{{ form.nombre.label_tag }}</td>

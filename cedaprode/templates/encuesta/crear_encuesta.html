@@ -1,9 +1,13 @@
 {%extends "base2.html"%}
 {%block title%}Formulario{%endblock%}
 {%block content%}
+<div  style="padding:15px;">
 <form action="." method="POST" accept-charset="utf-8">
+
   {% csrf_token %}
   {{form.as_p}}
+
 <p><input type="submit" value="Continue &rarr;"></p>
 </form>
+</div>
 {%endblock%}

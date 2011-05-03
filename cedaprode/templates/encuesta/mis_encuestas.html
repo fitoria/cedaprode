@@ -1,12 +1,30 @@
 {% extends "base2.html" %}
 {%block title%}Mis Encuestas{%endblock%}
 {% block content %}
+<div style="padding:15px;">
+    <h1><a href="{% url crear-encuesta%}"><img class="der" src="/files/imagen/nuev.jpg"></a></h1>
+    <h2 class="left"><img src="/files/imagen/survey.png"> MIS EVALUACIONES</h2>
+    <div class="separador"><br></div>
+    <div class="tabla">
+        {% regroup encuestas by organizacion as encuestas_list %}
+        {% for encuesta in encuestas_list%}
+          <div class="group">{{encuesta.grouper}}</div>
+         <table>
+         <tr>
+           <th>Fecha</th>
+           <th>Puntaje Obtenido</th>
+           <th>Accion</th>
+        </tr>
+          {% for item in encuesta.list%}
+          <tr>
+          <td>{{ item.fecha }}</td>
+          <td>0 / 70 <img src="/files/imagen/amarillo.png"> <img src="/files/imagen/verde.png"> <img src="/files/imagen/azul.png"></td>
+          <td><a href="#">Ver</a> | <a href="">Editar</a></td>
+          </tr>
+          {% endfor %}
+         </table>
+        {% endfor %}
 
-<h1><a href="{% url crear-encuesta%}">Crear Encuesta</a></h1>
-<h2>Mis Encuestas</h2>
-<ul>
-{% for encuesta in encuestas%}
-  <li>{{ encuesta }}| <a href="#">Ver</a> | <a href="{% url llenar-encuesta encuesta.id %}">Editar</a></li>
-{% endfor %}
-</ul>
+
+</div>
 {% endblock %}

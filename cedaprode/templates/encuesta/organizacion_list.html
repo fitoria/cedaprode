@@ -1,12 +1,29 @@
 {% extends "base2.html" %}
 {%block title%}Organizaciones{%endblock%}
 {% block content %}
+<div style="padding:15px;">
+    <h1><a href="{% url crear-organizacion%}"><img class="der" src="/files/imagen/nuev.jpg"></a></h1>
 
-<h1><a href="{% url crear-organizacion%}">Crear Organizacion</a></h1>
-<h2>Organizaciones</h2>
-<ul>
-{% for organizacion in object_list %}
-  <li>{{ organizacion.nombre }} | <a href="{% url organizacion-detalle organizacion.id %}">Ver</a> | <a href="{% url editar-organizacion organizacion.id %}">Editar</a></li>
-{% endfor %}
-</ul>
+    <h2 class="left">MIS ORGANIZACIONES</h2>
+    <div class="separador"><br></div>
+    <div class="tabla">
+    <table>
+        <tr>
+           <th>Nombre</th>
+           <th>Tipo</th>
+           <th>Municipio</th>
+           <th>Accion</th>
+        </tr>
+        {% for organizacion in object_list %}
+        <tr>
+           <td><b>{{ organizacion.nombre }}</b> </td>
+           <td>{{ organizacion.get_tipo_display }} </td>
+           <td>{{ organizacion.municipio.nombre }} </td>
+           <td><a href="{% url organizacion-detalle organizacion.id %}">Ver</a> | <a href="{% url editar-organizacion organizacion.id %}">Editar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</div>
+
 {% endblock %}

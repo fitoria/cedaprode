@@ -15,14 +15,25 @@
                     <a href="{% url user-logout %}"><img src="/files/imagen/out.png">   Salir</a>
                 </div>
             </div>
+            <div id="user-info" style="padding:15px;">
+                <img src="/files/imagen/user.png" align="left"></img>
+                <div id="usuario">Byron Corrales</div>
+                <div id="mail">byroncorrales@gmail.com</div>
+                <div class="separador"></div>
+                <div id="misorg">MIS ORGANIZACIONES</div>
+                </br>
+                <a href="#">Organizacion 1</a>
+                <a href="#">Organizacion 2</a>
+                <div class="separador"></div>
+            </div>
         </div>
         <div id="cuerpo">
             <div id="panel" style="height:90px !important;">
                    </br>
                    <a href="{% url organizaciones %}"><img class="izq" src="/files/imagen/organizacionboton.jpg"></img></a>
                    <a href="{% url mis-encuestas %}"><img class="izq" style="margin-left:-8px;"src="/files/imagen/evaluacionboton.jpg"></a>
-                   <img class="izq" style="margin-left:-8px;"src="/files/imagen/explorarboton.jpg"></img>
-                   <img class="izq"style="margin-left:-8px;" src="/files/imagen/ayudaboton.jpg"></img>
+                   <a href=""><img class="izq" style="margin-left:-8px;"src="/files/imagen/explorarboton.jpg"></img></a>
+                   <a href=""><img class="izq"style="margin-left:-8px;" src="/files/imagen/ayudaboton.jpg"></img></a>
                    <div class="separador"></div>
             </div>
             {%block content%}

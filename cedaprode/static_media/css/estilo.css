@@ -63,7 +63,7 @@ h2{
 #logo{
     widht:239px;
     height:120px;
-    background:url(/files/imagen/logo.jpg) no-repeat;
+    background:url(/files/imagen/logo.png) no-repeat;
     border-bottom:#691f00 solid 1px;
 }
 
@@ -221,6 +221,26 @@ label{
     font-size:13px;
     margin-left:8px;
     float:left;
+}
+
+#tabladescrip table{
+    width:100%;
+    padding:10px;
+    border-spacing: 0;
+}
+
+#tabladescrip table th{
+    color:#000;
+    border-bottom:#bac5cd 1px solid ;
+        padding:4px;
+    text-align:left;
+}
+#tabladescrip table tr,#tabladescrip table td{
+    border-bottom:#bac5cd 1px solid ;
+    border-collapse:collapse;
+    padding:8px;
+    color:#000;
+    font-size:13px;
 }
 
 #mail{

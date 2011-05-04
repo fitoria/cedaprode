@@ -121,3 +121,11 @@ def resultados(request):
 
     return render_to_response('encuesta/resultados.html', {'encuestas': encuestas},
                               context_instance=RequestContext(request))
+
+@login_required
+def organizaciones(request):
+    organizaciones = Organizacion.objects.filter(creado_por=request.user)
+
+    return render_to_response('encuesta/organizacion_list.html', 
+                              {'object_list': organizaciones},
+                              context_instance=RequestContext(request))

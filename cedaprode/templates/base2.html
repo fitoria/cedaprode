@@ -15,17 +15,7 @@
                     <a href="{% url user-logout %}"><img src="/files/imagen/out.png">   Salir</a>
                 </div>
             </div>
-            <div id="user-info" style="padding:15px;">
-                <img src="/files/imagen/user.png" align="left"></img>
-                <div id="usuario">Byron Corrales</div>
-                <div id="mail">byroncorrales@gmail.com</div>
-                <div class="separador"></div>
-                <div id="misorg">MIS ORGANIZACIONES</div>
-                </br>
-                <a href="#">Organizacion 1</a>
-                <a href="#">Organizacion 2</a>
-                <div class="separador"></div>
-            </div>
+            {%block sidebar%}{%endblock%}
         </div>
         <div id="cuerpo">
             <div id="panel" style="height:90px !important;">

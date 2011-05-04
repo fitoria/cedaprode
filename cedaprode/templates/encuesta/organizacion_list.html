@@ -27,3 +27,17 @@
 </div>
 
 {% endblock %}
+{%block sidebar%}
+<div id="user-info" style="padding:15px;">
+      <img src="/files/imagen/user.png" align="left"></img>
+      <div id="usuario">{{request}}</div>
+      <div id="mail">{{request.user.email}}</div>
+      <div class="separador"></div>
+      <div id="misorg">MIS ORGANIZACIONES</div>
+      </br>
+      {% for organizacion in object_list %}
+        <a href="#">{{organizacion.nombre}}</a>
+      {% endfor %}
+      <div class="separador"></div>
+</div>
+{%endblock%}

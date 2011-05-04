@@ -125,7 +125,24 @@ def resultados(request):
 @login_required
 def organizaciones(request):
     organizaciones = Organizacion.objects.filter(creado_por=request.user)
+    form = BuscarForm()
 
     return render_to_response('encuesta/organizacion_list.html', 
-                              {'object_list': organizaciones},
+                              {'object_list': organizaciones, 'form': form},
                               context_instance=RequestContext(request))
+
+@login_required
+def buscar_orgs(request):
+    if request.method == "POST":
+        form = BuscarForm(request.POST)
+        if form.is_valid():
+            resultados = Organizacion.objects.filter(tipo = form.cleaned_data['tipo'],municipio = form.cleaned_data['municipio'])
+            return render_to_response('encuesta/buscar_orgs.html', 
+                              {'organizaciones': resultados, 'form': form},
+                              context_instance=RequestContext(request))
+    else:
+        form = BuscarForm()
+        return render_to_response('encuesta/buscar_orgs.html', 
+                          {'form': form},
+                          context_instance=RequestContext(request))
+

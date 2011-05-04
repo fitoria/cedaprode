@@ -46,7 +46,10 @@ class Encuesta(models.Model):
     
     def puntaje(self):
         puntos = Respuesta.objects.filter(encuesta = self).aggregate(p=Sum('respuesta__puntaje'))['p']
-        return puntos 
+        if puntos:
+            return puntos 
+        else:
+            return 0
 
 class Categoria(models.Model):
     '''Categoria principal'''

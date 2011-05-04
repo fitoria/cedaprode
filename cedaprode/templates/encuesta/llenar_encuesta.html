@@ -1,7 +1,70 @@
 {%extends "base2.html"%}
 {%block title%}Formulario{%endblock%}
+{%block extra_head%}
+    <link href="/files/css/jquery.stepy.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="/files/js/jquery.js"></script>
+    <script type="text/javascript" src="/files/js/jquery.stepy.min.js"></script>
+<script type="text/javascript">
+            $(function() {
+
+                $('#default').stepy();
+
+                $('#custom').stepy({
+                    backLabel:  'Backward',
+                    block:      true,
+                    errorImage: true,
+                    nextLabel:  'Forward',
+                    titleClick: true,
+                    validate:   true
+                });
+
+                $('div#step').stepy({
+                    finish: false
+                });
+
+                $('#callback').stepy({
+                    onBack: function(index) {
+                        alert('Going to step ' + index + '...');
+                    },
+                    onNext: function(index) {
+                        var random = Math.floor(Math.random() * 11);
+
+                        if (random <= 5) {
+                            alert('Invalid value!');
+                            return false;
+                        }
+
+                        alert('Going to step ' + index + '...');
+                    },
+                    titleClick: true
+                });
+
+            });
+        </script>
+
+{%endblock%}
 {%block content%}
 <div  style="padding:15px;">
+
+        <form id="default">
+            <fieldset title="Step 1">
+                <legend>description one</legend>
+                <label>User:</label> <input type="text" value="wbotelhos" size="40" disabled="disabled"/> <!-- Disabled fields are not focused.  -->
+                <label>E-mail:</label> <input type="text" size="40"/>
+
+                <label>Password:</label> <input type="password" size="40"/>
+            </fieldset>
+
+            <fieldset title="Step 2">
+                <legend>description two</legend>
+                <label>Nick Name:</label> <input type="text"size="30"/>
+                <label>Bio:</label> <textarea rows="5" cols="60"></textarea>
+
+            </fieldset>
+
+            <input type="submit" class="finish" value="Finish!"/>
+        </form><br/>
+
     <h2 class="left">EVALUACION</h2>
     <form action="." method="POST" accept-charset="utf-8">
       {% csrf_token %}

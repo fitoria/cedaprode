@@ -1,25 +1,28 @@
 {% extends "base2.html" %}
 {%block title%}Resultado{%endblock%}
 {% block content %}
-  <h1>RESULTADO DE LA EVALUACION</H1>
+<div  style="padding:15px;">
+  <h2 class="left"> RESULTADO DE LA EVALUACION</h2>
+  <div id="tabladescrip">
   <table border="0">
     <tr>
-      <td>Organizacion</td>
+      <td><b>ORGANIZACION</b></td>
       <td>{{encuesta.organizacion}}</td>
     </tr>
     <tr>
-      <td>Tipo</td>
-      <td>{{encuesta.organizacion.tipo}}</td>
+      <td><b>TIPO</b></td>
+      <td>{{encuesta.organizacion.get_tipo_display}}</td>
     </tr>
     <tr>
-      <td>Descripcion</td>
+      <td><b>DESCRIPCION</b></td>
       <td>{{encuesta.organizacion.descripcion}}</td>
     </tr>
     <tr>
-      <td>Fecha</td>
+      <td><b>FECHA</b></td>
       <td>{{encuesta.fecha}}</td>
     </tr>
   </table>
+</div>
   {%for fila in resultados%}
   <div id="categoria-{{fila.categoria.id}}">
     {{fila.categoria}}
@@ -36,5 +39,6 @@
     </table>
     <div id="grafo-{{fila.categoria.id}}"><img src="{{fila.grafo_url}}" />
   </div>
+</div>
   {%endfor%}
 {% endblock %}

@@ -32,3 +32,7 @@ class OrganizacionForm(forms.ModelForm):
 
     class Meta:
         model = Organizacion
+
+class BuscarForm(forms.Form):
+    municipio = forms.ModelChoiceField(queryset = Municipio.objects.all())
+    tipo = forms.ChoiceField(choices = TIPOS_ORG)

@@ -70,12 +70,14 @@
       {% csrf_token %}
       {{ formset.management_form }}
       {% for form in formset %}
+        <div class="categoria-{{form.instance.pregunta.categoria.id}}">
         {{form.pregunta}}
         {{form.id}}
         {{form.instance.pregunta.titulo}}
         {{form.respuesta}}
         Explique como se ha determinado esta referencia: {{form.comentario}}
         {{form.errors}}
+      </div>
       {% endfor %}
     <p><input type="submit" value="Continue &rarr;"></p>
     </form>

@@ -1,4 +1,5 @@
 {%extends "base2.html"%}
+{%load clasificador %}
 {%block title%}Formulario{%endblock%}
 {%block extra_head%}
     <link href="/files/css/jquery.stepy.css" rel="stylesheet" type="text/css" media="screen" />
@@ -8,37 +9,18 @@
             $(function() {
 
                 $('#default').stepy();
-
-                $('#custom').stepy({
-                    backLabel:  'Backward',
-                    block:      true,
-                    errorImage: true,
-                    nextLabel:  'Forward',
-                    titleClick: true,
-                    validate:   true
-                });
+                $('#encuesta').stepy({
+                   backLabel: 'Anterior',
+                   block:      true,
+                   errorImage: true,
+                   nextLabel:  'Siguiente', 
+                   titleClick: true,
+                   validate:   false 
+                  });
 
                 $('div#step').stepy({
                     finish: false
                 });
-
-                $('#callback').stepy({
-                    onBack: function(index) {
-                        alert('Going to step ' + index + '...');
-                    },
-                    onNext: function(index) {
-                        var random = Math.floor(Math.random() * 11);
-
-                        if (random <= 5) {
-                            alert('Invalid value!');
-                            return false;
-                        }
-
-                        alert('Going to step ' + index + '...');
-                    },
-                    titleClick: true
-                });
-
             });
         </script>
 
@@ -66,18 +48,21 @@
         </form><br/>
 
     <h2 class="left">EVALUACION</h2>
-    <form action="." method="POST" accept-charset="utf-8">
+    <form action="." method="POST" accept-charset="utf-8" id="encuesta">
       {% csrf_token %}
       {{ formset.management_form }}
-      {% for form in formset %}
-        <div class="categoria-{{form.instance.pregunta.categoria.id}}">
-        {{form.pregunta}}
-        {{form.id}}
-        {{form.instance.pregunta.titulo}}
-        {{form.respuesta}}
-        Explique como se ha determinado esta referencia: {{form.comentario}}
-        {{form.errors}}
-      </div>
+      {% for fila in formset|categorizador%}
+        <fieldset class="categoria-{{fila.categoria.id}}" title="Paso {{forloop.counter}}">
+          <legend>{{fila.categoria.titulo}}</legend>
+          {% for form in fila.forms%}
+          {{form.pregunta}}
+          {{form.id}}
+          {{form.instance.pregunta.titulo}}
+          {{form.respuesta}}
+          Explique como se ha determinado esta referencia: {{form.comentario}}
+          {{form.errors}}
+          {%endfor%}
+        </fieldset>
       {% endfor %}
     <p><input type="submit" value="Continue &rarr;"></p>
     </form>

@@ -89,6 +89,7 @@ class Respuesta(models.Model):
 
     class Meta:
         unique_together = ['encuesta', 'pregunta']
+        ordering = ['pregunta__categoria']
 
     def __unicode__(self):
         if self.respuesta:

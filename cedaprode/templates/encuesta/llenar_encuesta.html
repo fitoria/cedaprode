@@ -7,13 +7,11 @@
     <script type="text/javascript" src="/files/js/jquery.stepy.min.js"></script>
 <script type="text/javascript">
             $(function() {
-
-
                 $('#encuesta').stepy({
-                   backLabel: 'Anterior',
+                   backLabel: '&larr; Anterior',
                    block:      true,
                    errorImage: true,
-                   nextLabel:  'Siguiente',
+                   nextLabel:  'Siguiente &rarr;',
                    titleClick: true,
                    validate:   false
                   });
@@ -27,9 +25,6 @@
 {%endblock%}
 {%block content%}
 <div  style="padding:15px;">
-
-
-
     <h2 class="left">EVALUACION</h2>
     <form action="." method="POST" accept-charset="utf-8" id="encuesta">
       {% csrf_token %}

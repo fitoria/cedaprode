@@ -24,11 +24,5 @@
         {% endfor %}
     </table>
     </div>
-    <form action="{%url buscar-orgs %}" method="POST" accept-charset="utf-8">
-      {% csrf_token %}
-      {{form.as_p}}
-    
-    <p><input type="submit" value="Continue &rarr;"0></p>
-    </form>
 </div>
 {% endblock %}

@@ -5,10 +5,14 @@ a.button-back, a.button-next, input.finish {
     color: #FFF;
     font: 10px verdana;
     padding: 5px 10px;
+    font-size:16px;
+    font-weight:bold;
 }
 
 input.finish {
     padding: 3px 9px;
+    font-size:16px;
+    font-weight:bold;
 }
 
 a.button-back, a.button-next, input.finish, fieldset.step {
@@ -21,16 +25,22 @@ a.button-back, a.button-next, input.finish, fieldset.step {
 
 a.button-back:hover, a.button-next:hover, input.finish:hover {
     background-color: #6699CC;
+    font-size:16px;
+    font-weight:bold;
 }
 
 a.button-back {
     float: left;
     text-decoration: none;
+    font-size:16px;
+    font-weight:bold;
 }
 
 a.button-next {
     float: right;
     text-decoration: none;
+    font-size:16px;
+    font-weight:bold;
 }
 
 fieldset.step {
@@ -51,6 +61,7 @@ fieldset.step input, fieldset.step textarea, fieldset.step select {
     border: 1px solid #AAA;
     font: 10px Arial;
     margin-left: 7px;
+
 }
 
 fieldset.step label {
@@ -67,6 +78,8 @@ input.finish {
     cursor: pointer;
     float: right;
     text-decoration: none;
+font-size:16px;
+    font-weight:bold;
 }
 
 li.error-image {

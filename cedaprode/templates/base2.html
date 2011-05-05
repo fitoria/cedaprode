@@ -5,15 +5,15 @@
     <link href="/files/css/estilo.css" rel="stylesheet" type="text/css" media="screen" />
     <title>{%block title%}{%endblock%}</title>
     <script type="text/javascript" src="/files/js/jquery-1.5.1.min.js"></script>
-    {%block extra_head%}{%endblock%}
         <script type="text/javascript">
-            $(document).ready(function(){
-                var ancho1 = $('#marco').width();
-                var ancho2 = $('#sidebar').width();
-                var ancho3 = ancho1 - ancho2;
+            $(window).load(function(){
+                var ancho1 = $(window).width();
+                var ancho3 = ancho1 - 239;
                 $('#cuerpo').width(ancho3-20);
             });
         </script>
+    {%block extra_head%}{%endblock%}
+
   </head>
   <body>
     <div id ="marco">

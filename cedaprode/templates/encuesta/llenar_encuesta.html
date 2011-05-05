@@ -13,9 +13,9 @@
                    backLabel: 'Anterior',
                    block:      true,
                    errorImage: true,
-                   nextLabel:  'Siguiente', 
+                   nextLabel:  'Siguiente',
                    titleClick: true,
-                   validate:   false 
+                   validate:   false
                   });
 
                 $('div#step').stepy({
@@ -53,13 +53,20 @@
       {{ formset.management_form }}
       {% for fila in formset|categorizador%}
         <fieldset class="categoria-{{fila.categoria.id}}" title="Paso {{forloop.counter}}">
-          <legend>{{fila.categoria.titulo}}</legend>
+          <legend>{{fila.categoria.titulo|truncatewords:"2"}}</legend>
           {% for form in fila.forms%}
+          <div class="izq" style="width:400px;">
           {{form.pregunta}}
           {{form.id}}
           {{form.instance.pregunta.titulo}}
           {{form.respuesta}}
+          </div>
+          <div style="float:right; font-size:11px; width:280px;">
           Explique como se ha determinado esta referencia: {{form.comentario}}
+          </div>
+          <div class="separador"></div>
+          <hr style="background-color:#ccc;color:#ccc; border:0; height:1px;">
+          <br>
           {{form.errors}}
           {%endfor%}
         </fieldset>

@@ -24,6 +24,7 @@
 {%block content%}
 <div  style="padding:15px;">
     <h2 class="left">EVALUACION</h2>
+    <br>
     <form action="." method="POST" accept-charset="utf-8" id="encuesta">
       {% csrf_token %}
       {{ formset.management_form }}

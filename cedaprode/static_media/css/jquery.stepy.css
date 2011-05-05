@@ -61,7 +61,13 @@ fieldset.step input, fieldset.step textarea, fieldset.step select {
     border: 1px solid #AAA;
     font: 10px Arial;
     margin-left: 7px;
-
+}
+fieldset.step input, fieldset.step fieldset.step select {
+    border: 1px solid #AAA;
+    font: 10px Arial;
+    margin-left: 7px;
+     font-size:16px;
+    font-weight:bold;
 }
 
 fieldset.step label {
@@ -95,7 +101,7 @@ ul.stepy-titles {
 }
 
 ul.stepy-titles li {
-    color: #DDD;
+    color: grey;
     cursor: pointer;
     font: bold 18px verdana;
     float: left;

@@ -25,7 +25,22 @@
                 </div>
             </div>
             <img src="/files/imagen/espiral.jpg"></img>
-            {%block sidebar%}{%endblock%}
+            {%block sidebar%}
+            <div id="user-info" style="padding:15px;">
+                  <img src="/files/imagen/user.png" align="left"></img>
+                  <div id="usuario">{{user.get_full_name}}</div>
+                  <div id="mail">{{user.email}}</div>
+                  <div class="separador"></div>
+                  <div id="misorg">MIS ORGANIZACIONES</div>
+                  </br>
+                  {%if logueado%}
+                  {% for organizacion in orgs %}
+                    <a href="#">{{organizacion.nombre}}</a>
+                  {% endfor %}
+                  <div class="separador"></div>
+                  {%endif%}
+            </div>
+            {%endblock%}
             <hr style="background-color:#b8a2a2;color:#b8a2a2; border:0; height:1px;"></hr>
             <br></br><center><img src="/files/imagen/cedaprode.png"></img></center><br></br>
             <br></br><center><img src="/files/imagen/unops.png"></img></center><br></br>

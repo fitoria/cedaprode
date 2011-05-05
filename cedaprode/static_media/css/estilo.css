@@ -29,6 +29,8 @@ body{
     font-family:Arial;
     color:#555753;
     font-size:14px;
+   height:100%; /* Important */
+
 }
 
 p{line-height:1.3;}
@@ -43,7 +45,7 @@ h2{
     font-weight:normal;
 }
 #marco{
-    width:960px;
+    width:100%;
 }
 
 #sidebar{
@@ -52,7 +54,6 @@ h2{
 }
 
 #cuerpo{
-    width:720px;
     float:left;
 }
 

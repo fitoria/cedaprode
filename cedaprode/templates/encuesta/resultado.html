@@ -1,9 +1,9 @@
-{% extends "base2.html" %}
+{%extends "base2.html"%}
 {%block title%}Resultado{%endblock%}
 {%block extra_head%}
     <link href="/files/css/jquery-ui-1.8.12.custom.css" rel="stylesheet" type="text/css" media="screen" />
-    <script type="text/javascript" src="/files/js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="/files/js/jquery-ui-1.8.12.custom.min.js"></script>
+
         <script type="text/javascript">
             $(function(){
 
@@ -45,9 +45,14 @@
     <div id="tabs">
       <ul>
       {%for fila in resultados%}
-        <li><a href="#tabs-{{fila.categoria.id}}">{{fila.categoria|truncatewords:"1"}}</a></li>
+        <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria|truncatewords:"1"}}</a></li>
       {%endfor%}
     </ul>
+        <script type="text/javascript">
+        $(document).ready(function(){
+        $('.algo').text( ('.algo').text().replace('.', '') );
+        });
+        </script>
     {%for fila in resultados%}
 
         <div id="tabs-{{fila.categoria.id}}">

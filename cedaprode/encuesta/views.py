@@ -117,9 +117,16 @@ def resultado(request, encuesta_id):
                               context_instance=RequestContext(request))
 @login_required
 def resultados(request):
-    encuestas = Encuesta.objects.filter(usuario = request.user)
+    if request.method == 'POST':
+        form = BuscarResultadoForm(request.POST)
+        if form.is_valid():
+            encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'])
+    else:
+        form = BuscarResultadoForm()
+        encuestas = Encuesta.objects.filter(usuario = request.user)
 
-    return render_to_response('encuesta/resultados.html', {'encuestas': encuestas},
+    return render_to_response('encuesta/resultados.html', 
+                              {'encuestas': encuestas, 'form': form},
                               context_instance=RequestContext(request))
 
 @login_required

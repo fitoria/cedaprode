@@ -88,7 +88,7 @@ def editar_organizacion(request, organizacion_id):
 
 @login_required
 def mis_encuestas(request):
-    encuestas = Encuesta.objects.filter(usuario = request.user)
+    encuestas = Encuesta.objects.filter(usuario = request.user).order_by('organizacion')
     return render_to_response('encuesta/mis_encuestas.html', {'encuestas': encuestas},
                               context_instance=RequestContext(request))
 
@@ -96,23 +96,23 @@ def mis_encuestas(request):
 def resultado(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
     #lista que tendra todos los resultados...
-    resultados = [] 
+    resultados = []
     for categoria in Categoria.objects.all():
-        puntaje = Respuesta.objects.filter(encuesta=encuesta, 
+        puntaje = Respuesta.objects.filter(encuesta=encuesta,
                                            pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
         fila = {'categoria': categoria, 'puntaje': puntaje}
         respuestas = []
         for pregunta in Pregunta.objects.filter(categoria = categoria):
-            respuesta = Respuesta.objects.get(encuesta = encuesta, 
+            respuesta = Respuesta.objects.get(encuesta = encuesta,
                                                   pregunta = pregunta)
             respuestas.append(respuesta)
         grafo_url = generar_grafo(respuestas, categoria.titulo)
         fila['respuestas'] = respuestas
-        fila['grafo_url'] = grafo_url 
+        fila['grafo_url'] = grafo_url
         fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
-    return render_to_response('encuesta/resultado.html', 
+    return render_to_response('encuesta/resultado.html',
                               {'encuesta': encuesta, 'resultados': resultados},
                               context_instance=RequestContext(request))
 @login_required
@@ -127,7 +127,7 @@ def organizaciones(request):
     organizaciones = Organizacion.objects.filter(creado_por=request.user)
     form = BuscarForm()
 
-    return render_to_response('encuesta/organizacion_list.html', 
+    return render_to_response('encuesta/organizacion_list.html',
                               {'object_list': organizaciones, 'form': form},
                               context_instance=RequestContext(request))
 
@@ -137,12 +137,12 @@ def buscar_orgs(request):
         form = BuscarForm(request.POST)
         if form.is_valid():
             resultados = Organizacion.objects.filter(tipo = form.cleaned_data['tipo'],municipio = form.cleaned_data['municipio'])
-            return render_to_response('encuesta/buscar_orgs.html', 
+            return render_to_response('encuesta/buscar_orgs.html',
                               {'organizaciones': resultados, 'form': form},
                               context_instance=RequestContext(request))
     else:
         form = BuscarForm()
-        return render_to_response('encuesta/buscar_orgs.html', 
+        return render_to_response('encuesta/buscar_orgs.html',
                           {'form': form},
                           context_instance=RequestContext(request))
 

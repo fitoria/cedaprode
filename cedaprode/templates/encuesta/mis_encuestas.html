@@ -19,7 +19,7 @@
           {% for item in encuesta.list%}
           <tr>
           <td>{{ item.fecha }}</td>
-          <td> {{item.puntaje}} / 180 <img src="{{ item.puntaje|clasificador }}"/></td>
+          <td> <img src="{{ item.puntaje|clasificador }}"/> {{item.puntaje}} / 180 </td>
           <td><a href="#">Ver</a> | <a href="">Editar</a></td>
           </tr>
           {% endfor %}

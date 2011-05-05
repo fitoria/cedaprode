@@ -115,6 +115,13 @@ def resultado(request, encuesta_id):
     return render_to_response('encuesta/resultado.html',
                               {'encuesta': encuesta, 'resultados': resultados},
                               context_instance=RequestContext(request))
+
+#@login_required
+#def resultado_consolidado(request, encuesta_id):
+#    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+#    for categoria in Categoria.objects.all():
+#        puntaje
+
 @login_required
 def resultados(request):
     if request.method == 'POST':
@@ -132,10 +139,11 @@ def resultados(request):
 @login_required
 def organizaciones(request):
     organizaciones = Organizacion.objects.filter(creado_por=request.user)
-    form = BuscarForm()
+    #form = BuscarForm()
 
     return render_to_response('encuesta/organizacion_list.html',
-                              {'object_list': organizaciones, 'form': form},
+                              {'object_list': organizaciones},
+                              #{'object_list': organizaciones, 'form': form},
                               context_instance=RequestContext(request))
 
 @login_required

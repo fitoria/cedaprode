@@ -6,6 +6,7 @@
     <h1><a href="{% url crear-encuesta%}"><img class="der" src="/files/imagen/nuev.jpg"></a></h1>
     <h2 class="left"><img src="/files/imagen/survey.png"> MIS EVALUACIONES</h2>
     <div class="separador"><br></div>
+    <img src="/files/imagen/amarillo.png"/> = Regular <img src="/files/imagen/verde.png"/> = Excelente <img src="/files/imagen/azul.png"/> = Sobresaliente
     <div class="tabla">
         {% regroup encuestas by organizacion as encuestas_list %}
         {% for encuesta in encuestas_list%}
@@ -20,12 +21,12 @@
           <tr>
           <td>{{ item.fecha }}</td>
           <td> <img src="{{ item.puntaje|clasificador }}"/> {{item.puntaje}} / 180 </td>
-          <td><a href="#">Ver</a> | <a href="">Editar</a></td>
+          <td><a href="/resultado/{{item.id}}">Ver</a> | <a href="/llenar-encuesta/{{item.id}}">Editar</a></td>
           </tr>
           {% endfor %}
          </table>
         {% endfor %}
-
+    </div>
 
 </div>
 {% endblock %}

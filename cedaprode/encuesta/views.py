@@ -8,7 +8,7 @@ from django.db.models import Sum
 from forms import *
 from decorators import checar_permiso
 from models import *
-from utils import generar_grafo
+from utils import generar_grafo, generar_grafro_general
 
 def index(request):
     if request.user.is_authenticated():
@@ -116,11 +116,25 @@ def resultado(request, encuesta_id):
                               {'encuesta': encuesta, 'resultados': resultados},
                               context_instance=RequestContext(request))
 
-#@login_required
-#def resultado_consolidado(request, encuesta_id):
-#    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
-#    for categoria in Categoria.objects.all():
-#        puntaje
+@login_required
+def resultado_consolidado(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    puntajes = []
+    ejes = []
+    tabla = []
+    for categoria in Categoria.objects.all():
+        puntaje = Respuesta.objects.filter(encuesta = encuesta, 
+                                           pregunta__categoria = categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
+        puntajes.append(puntaje)
+        ejes.append(categoria.titulo)
+        tabla.append({'categoria': categoria.titulo, 'puntaje':puntaje})
+    
+    url_grafo = generar_grafro_general("Consolidado", puntajes, ejes)
+
+    return render_to_response('encuesta/resultado_consolidado.html',
+                              {'encuesta': encuesta, 'tabla': tabla, 
+                               'url_grafo': url_grafo, 'total': sum(puntajes)},
+                              context_instance=RequestContext(request))
 
 @login_required
 def resultados(request):

@@ -22,3 +22,15 @@ def generar_grafo(queryset, titulo):
         return chart.get_url()
     except:
         return 'http://i.imgur.com/gWDUH.jpg'
+
+def generar_grafro_general(titulo, filas, ejes):
+    chart = Grafo(350, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
+    chart.add_data(filas)
+    chart.set_title(titulo)
+    chart.set_axis_labels('x', ejes)
+    chart.set_axis_range('y', 0, 5)
+    try:
+        return chart.get_url()
+    except:
+        return 'http://i.imgur.com/gWDUH.jpg'
+

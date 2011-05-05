@@ -3,6 +3,12 @@
 {% block content %}
 
 <h2>Resultados</h2>
+
+<form action="." method="post" accept-charset="utf-8">
+  {% csrf_token%}
+  {{form.as_p}}
+<p><input type="submit" value="Continue &rarr;"0></p>
+</form>
 <ul>
 {% for encuesta in encuestas%}
   <li>Encuesta a {{ encuesta.organizacion.nombre}} ({{encuesta.fecha}}) | <a href="{% url resultado encuesta.id %}">Ver</a></li>

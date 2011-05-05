@@ -4,7 +4,16 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <link href="/files/css/estilo.css" rel="stylesheet" type="text/css" media="screen" />
     <title>{%block title%}{%endblock%}</title>
+    <script type="text/javascript" src="/files/js/jquery-1.5.1.min.js"></script>
     {%block extra_head%}{%endblock%}
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var ancho1 = $('#marco').width();
+                var ancho2 = $('#sidebar').width();
+                var ancho3 = ancho1 - ancho2;
+                $('#cuerpo').width(ancho3);
+            });
+        </script>
   </head>
   <body>
     <div id ="marco">
@@ -15,9 +24,7 @@
             <hr style="background-color:#b8a2a2;color:#b8a2a2; border:0; height:1px;"></hr>
             <br></br><center><img src="/files/imagen/cedaprode.png"></img></center><br></br>
             <br></br><center><img src="/files/imagen/unops.png"></img></center><br></br>
-
         </div>
-
         <div id="cuerpo">
             <div id="panel">
                 <div class="margen">

@@ -56,8 +56,9 @@
     {%for fila in resultados%}
 
         <div id="tabs-{{fila.categoria.id}}">
-            {{fila.categoria}}
-            <table border="1">
+            <b style="font-size:16px;">{{fila.categoria}}</b><br><br>
+            <div class="tabla" >
+            <table>
               <tr><th>Pregunta</th><th>Puntaje Obtenido</th><th>Comentario</th></tr>
               {% for resp in fila.respuestas%}
               <tr>
@@ -68,7 +69,8 @@
               {%endfor%}
               <tr><td>TOTAL</td><td>{{fila.puntaje}}/{{fila.total_maximo}}</td></tr>
             </table>
-            <div id="grafo-{{fila.categoria.id}}"><img src="{{fila.grafo_url}}" /></div>
+            </div>
+            <div id="grafo-{{fila.categoria.id}}" style="width:100%; background:#fff;"><br><center><img src="{{fila.grafo_url}}" /></center></div>
         </div>
     {%endfor%}
     </div>

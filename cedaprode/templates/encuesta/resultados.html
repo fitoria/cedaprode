@@ -30,7 +30,7 @@
           <tr>
           <td>{{ encuesta.fecha }}</td>
           <td><a href="{% url resultado encuesta.id %}">{{encuesta.organizacion}}</a></td>
-          <td> <img src="{{ enceusta.puntaje }}"/> {{encuesta.puntaje}} / 180 </td>
+          <td> <img src="{{ encuesta.puntaje|clasificador }}"/> {{encuesta.puntaje}} / 180 </td>
           <td><a href="{% url resultado encuesta.id %}">Ver</a> |
           </tr>
           {% endfor %}

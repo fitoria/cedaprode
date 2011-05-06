@@ -68,11 +68,11 @@
               {% for resp in fila.respuestas%}
               <tr>
                 <td>{{resp.pregunta}}</td>
-                <td>{{resp.respuesta.puntaje}}/5</td>
+                <td>{{resp.respuesta.puntaje|default:"0"}}/5</td>
                 <td><a href="" title="{{resp.comentario}}" class="vtip">{{resp.comentario|truncatewords:"10"}}</a></td>
               </tr>
               {%endfor%}
-              <tr><td>TOTAL</td><td>{{fila.puntaje}}/{{fila.total_maximo}}</td></tr>
+              <tr><td>TOTAL</td><td>{{fila.puntaje|default_if_none:"0"}}/{{fila.total_maximo}}</td></tr>
             </table>
             </div>
             <div id="grafo-{{fila.categoria.id}}" style="width:100%; background:#fff;"><br><center><img src="{{fila.grafo_url}}" /></center></div>
@@ -86,7 +86,7 @@
               {% for fila in resultados%}
               <tr>
                 <td>{{fila.categoria}}</td>
-                <td>{{fila.puntaje}}</td>
+                <td>{{fila.puntaje|default:"0"}}</td>
               </tr>
               {%endfor%}
               <tr><td>TOTAL</td><td>{{encuesta.puntaje}}/180</td></tr>

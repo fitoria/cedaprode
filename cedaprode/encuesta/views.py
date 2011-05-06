@@ -97,6 +97,7 @@ def resultado(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
     #lista que tendra todos los resultados...
     resultados = []
+    puntajes_consolidados = []
     for categoria in Categoria.objects.all():
         puntaje = Respuesta.objects.filter(encuesta=encuesta,
                                            pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
@@ -112,30 +113,10 @@ def resultado(request, encuesta_id):
         fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
+    url_grafo = generar_grafro_general("Consolidado", [r['puntaje'] for r in resultados], [r['categoria'].titulo for r in resultados])
     return render_to_response('encuesta/resultado.html',
-                              {'encuesta': encuesta, 'resultados': resultados},
+                              {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo},
                               context_instance=RequestContext(request))
-
-@login_required
-def resultado_consolidado(request, encuesta_id):
-    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
-    puntajes = []
-    ejes = []
-    tabla = []
-    for categoria in Categoria.objects.all():
-        puntaje = Respuesta.objects.filter(encuesta = encuesta, 
-                                           pregunta__categoria = categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
-        puntajes.append(puntaje)
-        ejes.append(categoria.titulo)
-        tabla.append({'categoria': categoria.titulo, 'puntaje':puntaje})
-    
-    url_grafo = generar_grafro_general("Consolidado", puntajes, ejes)
-
-    return render_to_response('encuesta/resultado_consolidado.html',
-                              {'encuesta': encuesta, 'tabla': tabla, 
-                               'url_grafo': url_grafo, 'total': sum(puntajes)},
-                              context_instance=RequestContext(request))
-
 @login_required
 def resultados(request):
     if request.method == 'POST':

@@ -47,6 +47,7 @@
   </div>
     <div id="tabs">
       <ul>
+        <li><a class="algo" href="#tabs-consolidado">Consolidado</a></li>
       {%for fila in resultados%}
         <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria.titulo|truncador:"2"}}</a></li>
       {%endfor%}
@@ -57,7 +58,6 @@
         });
         </script>
     {%for fila in resultados%}
-
         <div id="tabs-{{fila.categoria.id}}">
             <b style="font-size:16px;">{{fila.categoria}}</b><br><br>
             <div class="tabla" >
@@ -76,6 +76,22 @@
             <div id="grafo-{{fila.categoria.id}}" style="width:100%; background:#fff;"><br><center><img src="{{fila.grafo_url}}" /></center></div>
         </div>
     {%endfor%}
+        <div id="tabs-consolidado">
+            <b style="font-size:16px;">Consolidado</b><br><br>
+            <div class="tabla" >
+            <table>
+              <tr><th>Pregunta</th><th>Puntaje Obtenido</th></tr>
+              {% for fila in resultados%}
+              <tr>
+                <td>{{fila.categoria}}</td>
+                <td>{{fila.puntaje}}/5</td>
+              </tr>
+              {%endfor%}
+              <tr><td>TOTAL</td><td>{{encuesta.puntaje}}/180</td></tr>
+            </table>
+            </div>
+            <div id="grafo-consolidado" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo}}" /></center></div>
+        </div>
     </div>
 </div>
 {% endblock %}

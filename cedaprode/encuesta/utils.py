@@ -12,7 +12,7 @@ def generar_grafo(queryset, titulo):
             labels.append(respuesta.pregunta.titulo[:5])
         except:
             pass
-        
+
     chart = Grafo(350, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
     chart.add_data(data)
     chart.set_title(titulo)
@@ -21,7 +21,7 @@ def generar_grafo(queryset, titulo):
     try:
         return chart.get_url()
     except:
-        return 'http://i.imgur.com/gWDUH.jpg'
+        return '/files/imagen/grafoerror.jpg'
 
 def generar_grafro_general(titulo, filas, ejes):
     chart = Grafo(350, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
@@ -32,5 +32,4 @@ def generar_grafro_general(titulo, filas, ejes):
     try:
         return chart.get_url()
     except:
-        return 'http://i.imgur.com/gWDUH.jpg'
-
+        return '/files/imagen/grafoerror.jpg'

@@ -3,7 +3,9 @@
 {%block title%}Resultado{%endblock%}
 {%block extra_head%}
     <link href="/files/css/jquery-ui-1.8.12.custom.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/files/css/vtip.css" rel="stylesheet" type="text/css" media="screen" />
     <script type="text/javascript" src="/files/js/jquery-ui-1.8.12.custom.min.js"></script>
+    <script type="text/javascript" src="/files/js/vtip-min.js"></script>
 
         <script type="text/javascript">
             $(function(){
@@ -67,7 +69,7 @@
               <tr>
                 <td>{{resp.pregunta}}</td>
                 <td>{{resp.respuesta.puntaje}}/5</td>
-                <td>{{resp.comentario|truncatewords:"10"}}</td>
+                <td><a href="" title="{{resp.comentario}}" class="vtip">{{resp.comentario|truncatewords:"10"}}</a></td>
               </tr>
               {%endfor%}
               <tr><td>TOTAL</td><td>{{fila.puntaje}}/{{fila.total_maximo}}</td></tr>

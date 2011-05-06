@@ -9,11 +9,11 @@ def generar_grafo(queryset, titulo):
     for respuesta in queryset:
         try:
             data.append(int(respuesta.respuesta.puntaje))
-            labels.append(respuesta.pregunta.titulo[:5])
+            labels.append(respuesta.pregunta.titulo[:10])
         except:
             pass
 
-    chart = Grafo(350, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
+    chart = Grafo(400, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
     chart.add_data(data)
     chart.set_title(titulo)
     chart.set_axis_labels('x', labels)
@@ -24,7 +24,7 @@ def generar_grafo(queryset, titulo):
         return '/files/imagen/grafoerror.jpg'
 
 def generar_grafro_general(titulo, filas, ejes):
-    chart = Grafo(350, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
+    chart = Grafo(400, 350, auto_scale=True, x_range=(0,5), y_range=(0,5))
     chart.add_data(filas)
     chart.set_title(titulo)
     chart.set_axis_labels('x', ejes)

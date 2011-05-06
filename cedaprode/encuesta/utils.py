@@ -24,13 +24,14 @@ def generar_grafo(queryset, titulo):
     chart.set_legend_position('r')
     chart.set_axis_labels('x', labels)
     chart.set_axis_range('y', 0, 5)
+    chart.set_line_style(0, 2)
     try:
         return chart.get_url()
     except:
         return '/files/imagen/grafoerror.jpg'
 
 def generar_grafro_general(titulo, filas, ejes):
-    chart = Grafo(600, 350, auto_scale=True, x_range=(0,100), y_range=(0,100))
+    chart = Grafo(600, 350, auto_scale=True, x_range=(0,30), y_range=(0,30))
     filas.append(filas[0])
     chart.add_data(filas)
     chart.set_title(titulo)
@@ -38,6 +39,7 @@ def generar_grafro_general(titulo, filas, ejes):
     legends = [(str(i+1) + '-' + j) for i, j in enumerate(ejes)] 
     chart.set_legend(legends)
     chart.set_axis_range('y', 0, 30)
+    chart.set_line_style(0, 2)
     try:
         return chart.get_url()
     except:

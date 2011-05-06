@@ -8,12 +8,7 @@
     <form action="." method="post" accept-charset="utf-8">
       {% csrf_token%}
         <table>
-        <tr>
-            <td>{{ form.tipo.label_tag }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.tipo }}</td>
-        </tr>
+          {{form.as_table}}
         </table>
     <p><input type="submit" value="Continue &rarr;"0></p>
     </form>

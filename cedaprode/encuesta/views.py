@@ -141,7 +141,12 @@ def resultados(request):
     if request.method == 'POST':
         form = BuscarResultadoForm(request.POST)
         if form.is_valid():
-            encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'])
+            if form.cleaned_data['tipo'] and form.cleaned_data['municipio']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'], form.cleaned_data['municipio'])
+            elif form.cleaned_data['municipio']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['municipio'])
+            elif form.cleaned_data['tipo']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'])
     else:
         form = BuscarResultadoForm()
         encuestas = Encuesta.objects.filter(usuario = request.user)

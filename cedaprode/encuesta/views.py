@@ -8,7 +8,7 @@ from django.db.models import Sum
 from forms import *
 from decorators import checar_permiso
 from models import *
-from utils import generar_grafo
+from utils import generar_grafo, generar_grafro_general
 
 def index(request):
     if request.user.is_authenticated():
@@ -97,6 +97,7 @@ def resultado(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
     #lista que tendra todos los resultados...
     resultados = []
+    puntajes_consolidados = []
     for categoria in Categoria.objects.all():
         puntaje = Respuesta.objects.filter(encuesta=encuesta,
                                            pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
@@ -112,22 +113,21 @@ def resultado(request, encuesta_id):
         fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
+    url_grafo = generar_grafro_general("Consolidado", [r['puntaje'] for r in resultados], [r['categoria'].titulo for r in resultados])
     return render_to_response('encuesta/resultado.html',
-                              {'encuesta': encuesta, 'resultados': resultados},
+                              {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo},
                               context_instance=RequestContext(request))
-
-#@login_required
-#def resultado_consolidado(request, encuesta_id):
-#    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
-#    for categoria in Categoria.objects.all():
-#        puntaje
-
 @login_required
 def resultados(request):
     if request.method == 'POST':
         form = BuscarResultadoForm(request.POST)
         if form.is_valid():
-            encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'])
+            if form.cleaned_data['tipo'] and form.cleaned_data['municipio']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'], organizacion__municipio = form.cleaned_data['municipio'])
+            elif form.cleaned_data['municipio']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['municipio'])
+            elif form.cleaned_data['tipo']:
+                encuestas = Encuesta.objects.filter(organizacion__tipo = form.cleaned_data['tipo'])
     else:
         form = BuscarResultadoForm()
         encuestas = Encuesta.objects.filter(usuario = request.user)

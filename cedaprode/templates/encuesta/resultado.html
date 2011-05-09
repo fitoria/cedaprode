@@ -1,4 +1,5 @@
 {%extends "base2.html"%}
+{%load truncador%}
 {%block title%}Resultado{%endblock%}
 {%block extra_head%}
     <link href="/files/css/jquery-ui-1.8.12.custom.css" rel="stylesheet" type="text/css" media="screen" />
@@ -48,8 +49,9 @@
   </div>
     <div id="tabs">
       <ul>
+        <li><a class="algo" href="#tabs-consolidado">Consolidado</a></li>
       {%for fila in resultados%}
-        <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria|truncatewords:"1"}}</a></li>
+        <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria.titulo|truncador:"2"}}</a></li>
       {%endfor%}
     </ul>
         <script type="text/javascript">
@@ -58,7 +60,6 @@
         });
         </script>
     {%for fila in resultados%}
-
         <div id="tabs-{{fila.categoria.id}}">
             <b style="font-size:16px;">{{fila.categoria}}</b><br><br>
             <div class="tabla" >
@@ -67,16 +68,32 @@
               {% for resp in fila.respuestas%}
               <tr>
                 <td>{{resp.pregunta}}</td>
-                <td>{{resp.respuesta.puntaje}}/5</td>
+                <td>{{resp.respuesta.puntaje|default:"0"}}/5</td>
                 <td><a href="" title="{{resp.comentario}}" class="vtip">{{resp.comentario|truncatewords:"10"}}</a></td>
               </tr>
               {%endfor%}
-              <tr><td>TOTAL</td><td>{{fila.puntaje}}/{{fila.total_maximo}}</td></tr>
+              <tr><td>TOTAL</td><td>{{fila.puntaje|default_if_none:"0"}}/{{fila.total_maximo}}</td></tr>
             </table>
             </div>
             <div id="grafo-{{fila.categoria.id}}" style="width:100%; background:#fff;"><br><center><img src="{{fila.grafo_url}}" /></center></div>
         </div>
     {%endfor%}
+        <div id="tabs-consolidado">
+            <b style="font-size:16px;">Consolidado</b><br><br>
+            <div class="tabla" >
+            <table>
+              <tr><th>Pregunta</th><th>Puntaje Obtenido</th></tr>
+              {% for fila in resultados%}
+              <tr>
+                <td>{{fila.categoria}}</td>
+                <td>{{fila.puntaje|default:"0"}}</td>
+              </tr>
+              {%endfor%}
+              <tr><td>TOTAL</td><td>{{encuesta.puntaje}}/180</td></tr>
+            </table>
+            </div>
+            <div id="grafo-consolidado" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo}}" /></center></div>
+        </div>
     </div>
 </div>
 {% endblock %}

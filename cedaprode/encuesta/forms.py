@@ -39,3 +39,4 @@ class BuscarForm(forms.Form):
 
 class BuscarResultadoForm(forms.Form):
     tipo = forms.ChoiceField(choices = TIPOS_ORG, required=False)
+    municipio = forms.ModelChoiceField(queryset = Municipio.objects.all(), required=False)

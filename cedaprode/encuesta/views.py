@@ -113,7 +113,8 @@ def resultado(request, encuesta_id):
         fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
-    url_grafo = generar_grafro_general("Consolidado", [r['puntaje'] for r in resultados], [r['categoria'].titulo for r in resultados])
+    url_grafo = generar_grafro_general("Consolidado", [(r['puntaje'], (len(r['respuestas']*5))) for r in resultados], 
+                                       [r['categoria'].titulo for r in resultados])
     return render_to_response('encuesta/resultado.html',
                               {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo},
                               context_instance=RequestContext(request))

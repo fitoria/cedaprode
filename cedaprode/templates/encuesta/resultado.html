@@ -12,6 +12,7 @@
 
                 // Tabs
                 $('#tabs').tabs();
+                $('#grafos').tabs();
 
                 //hover states on the static widgets
                 $('#dialog_link, ul#icons li').hover(
@@ -92,7 +93,13 @@
               <tr><td>TOTAL</td><td>{{encuesta.puntaje}}/180</td></tr>
             </table>
             </div>
-            <div id="grafo-consolidado" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo}}" /></center></div>
+              <div id="grafos">
+              <ul>
+                <li><a class="algo" href="#grafo-consolidado-radar">Consolidado Radar</a></li>
+                <li><a class="algo" href="#grafo-consolidado-barra">Consolidado Barra</a></li>
+              </ul>
+                  <div id="grafo-consolidado-radar" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.radar}}" /></center></div>
+                  <div id="grafo-consolidado-barra" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.barra}}" /></center></div>
         </div>
     </div>
 </div>

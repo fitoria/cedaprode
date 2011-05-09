@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from pygooglechart import StackedVerticalBarChart as Barra, RadarChart as Grafo
+from pygooglechart import StackedHorizontalBarChart as Barra, RadarChart as Grafo
 
 def generar_grafo(queryset, titulo):
     '''Genera un grafo a partir de un queryset o lista de respuestas'''
@@ -35,16 +35,18 @@ def generar_grafro_general(titulo, filas, ejes):
                 radar=generar_grafo_radar_norm(titulo, filas, ejes))
 
 def generar_grafo_barra(titulo, filas, ejes):
-    chart = Barra(600, 350, auto_scale=True, x_range=(0,30), y_range=(0,30))
+    chart = Barra(620, 340, auto_scale=True, x_range=(0,30), y_range=(0,30))
     #filas.append(filas[0])
     chart.set_colours(['00ff00', 'ff0000'])
     chart.add_data([f[0] for f in filas])
     chart.add_data([f[1] for f in filas])
     chart.set_title(titulo)
-    chart.set_axis_labels('x', range(1, len(ejes)+ 1))
-    legends = [(str(i+1) + '-' + j) for i, j in enumerate(ejes)] 
+    #chart.set_axis_labels('x', range(1, len(ejes)+ 1))
+    legends = ['%s (%s/%s)' % (i, j[0], j[1]) for i, j in zip(ejes, filas)] 
+    chart.set_axis_labels('y', legends)
     #chart.set_legend(legends)
-    chart.set_axis_range('y', 0, 30)
+    chart.set_legend(['Puntaje alcanzado', 'Total posible'])
+    chart.set_axis_range('x', 0, 30)
     chart.set_line_style(0, 2)
     try:
         return chart.get_url()

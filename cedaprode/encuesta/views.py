@@ -97,7 +97,6 @@ def resultado(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
     #lista que tendra todos los resultados...
     resultados = []
-    puntajes_consolidados = []
     for categoria in Categoria.objects.all():
         puntaje = Respuesta.objects.filter(encuesta=encuesta,
                                            pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']

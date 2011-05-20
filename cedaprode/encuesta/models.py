@@ -26,6 +26,7 @@ class Organizacion(models.Model):
     def __unicode__(self):
         return self.nombre
 
+   
 class Encuesta(models.Model):
     organizacion = models.ForeignKey(Organizacion)
     fecha = models.DateTimeField(auto_now_add = True)
@@ -51,6 +52,13 @@ class Encuesta(models.Model):
         else:
             return 0
 
+class Adjunto(models.Model):
+    encuesta = models.ForeignKey(Encuesta)
+    archivo = models.FileField(upload_to="adjuntos")
+
+    def __unicode__(self):
+        return "Adjunto para %s" self.encuesta
+ 
 class Categoria(models.Model):
     '''Categoria principal'''
     titulo = models.CharField(max_length=200)

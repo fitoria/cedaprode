@@ -166,3 +166,15 @@ def buscar_orgs(request):
         return render_to_response('encuesta/buscar_orgs.html',
                           {'form': form},
                           context_instance=RequestContext(request))
+
+@login_required
+@checar_permiso
+def adjuntar(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+
+    if request.method == "POST":
+        pass
+    else request.method == "GET":
+        return render_to_response('encuesta/buscar_orgs.html',
+                          {'form': form},
+                          context_instance=RequestContext(request))

@@ -173,8 +173,21 @@ def adjuntar(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
 
     if request.method == "POST":
-        pass
+        form  = AdjuntoForm(request.POST)
+        if form.is_valid():
+            form.save()
     else request.method == "GET":
-        return render_to_response('encuesta/buscar_orgs.html',
-                          {'form': form},
-                          context_instance=RequestContext(request))
+        form  = AdjuntoForm(instance = encuesta)
+
+    return render_to_response('encuesta/adjuntar.html',
+                      {'form': form},
+                      context_instance=RequestContext(request))
+
+@login_required
+def ver_adjuntos(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    adjuntos =  Adjunto.objects.filter(encuesta = encuesta)
+
+    return render_to_response('encuesta/ver_adjuntos.html',
+                      {'adjuntos': adjuntos},
+                      context_instance=RequestContext(request))

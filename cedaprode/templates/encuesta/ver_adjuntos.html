@@ -1,0 +1,14 @@
+{% extends "base2.html" %}
+{% load clasificador%}
+{%block title%}Ver Adjuntos{%endblock%}
+{% block content %}
+<div  style="padding:15px;">
+      <h2 class="left">VER ADJUNTOS</h2>
+      <br>
+          {% for adjunto in adjunto%}
+            {{adjunto.nombre}} 
+          {% endfor %}
+         </table>
+    </div>
+</div>
+{% endblock %}

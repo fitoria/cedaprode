@@ -26,15 +26,17 @@ $(document).ready(function() {
    chart = new Highcharts.Chart({
       chart: {
          renderTo: 'highchart',
-         defaultSeriesType: 'bar'
+         defaultSeriesType: 'bar',
+         width: 650,
+         height: 450,
       },
       title: {
          text: 'Consolidado'
       },
       xAxis: {
          //preguntas
-         //categories: {{url_grafo.barra.legends}} 
-         categories: ['la puta madre','acción 10'] 
+         categories: [{%for legend in url_grafo.barra.legends%} '{{legend}}',{%endfor%}]  
+         //categories: ['la puta madre','acción 10'] 
       },
       yAxis: {
          min: 0,
@@ -47,14 +49,27 @@ $(document).ready(function() {
          reversed: true
       },
       tooltip: {
-         formatter: function() {
-            return ''+
-                this.series.name +': '+ this.y +'';
-         }
+        enabled: false 
       },
       plotOptions: {
          series: {
-            stacking: 'normal'
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                align: 'center',
+                color: '#000',
+                formatter: function() {
+                  if (this.series.name == 'Puntaje total'){
+                    return '' + this.point.stackTotal;
+                  }else {
+                    return ''+ this.y;
+                  }
+                 },
+                style: {
+                    font: '12px Trebuchet MS, Verdana, sans-serif'
+                }
+            }
+
          }
       },
          series: [{ //puntajes

@@ -24,7 +24,17 @@
 {%block content%}
 <div  style="padding:15px;">
     <h2 class="left">EVALUACION</h2>
-    <a href="{% url adjuntar encuesta %}">Adjuntar</a>
+    <a href="{% url adjuntar encuesta %}"><img class="der"src="/files/imagen/botonadjuntar.png"></a>
+    {%if adjuntos %}
+      <div id="tabladescrip">
+          <table border="0">
+              <td><b>DOCUMENTOS ADJUNTOS</b></td>
+              <td>{%for adjunto in adjuntos%}<a href="{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
+            </tr>
+          </table>
+      </div>
+    {%endif%}
+    <div class="separador"></div>
     <br>
     <form action="." method="POST" accept-charset="utf-8" id="encuesta">
       {% csrf_token %}

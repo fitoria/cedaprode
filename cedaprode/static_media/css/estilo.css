@@ -247,6 +247,16 @@ label{
     font-size:13px;
 }
 
+#tabladescrip a{
+    color:#4e8a91;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+#tabladescrip a:hover{
+    color:#000;
+}
+
 #mail{
     color:#343a3d;
     font-size:13px;
@@ -279,4 +289,15 @@ label{
 
 #user-info a:hover{
     text-decoration:underline
+}
+
+#enlacefooter{
+    font-size:12px;
+    padding: 0px 20px 0px 20px;
+}
+
+#enlacefooter a{
+    text-decoration:none;
+    color:#8e3d25;
+
 }

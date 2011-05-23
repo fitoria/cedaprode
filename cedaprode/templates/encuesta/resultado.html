@@ -50,6 +50,12 @@
           <td><b>AUTOR</b></td>
           <td>{{encuesta.usuario.get_full_name}}</td>
         </tr>
+        {%if adjuntos %}
+        <tr>
+          <td><b>DOCUMENTOS ADJUNTOS</b></td>
+          <td>{%for adjunto in adjuntos%}<a href="{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
+        </tr>
+        {%endif%}
       </table>
   </div>
     <div id="tabs">

@@ -7,7 +7,7 @@
 <div  style="padding:15px;">
     <h2 class="left">Adjuntar Documento a Encuesta</h2>
     <br>
-    <form action="." method="POST" accept-charset="utf-8" id="encuesta">
+    <form action="." method="POST" accept-charset="utf-8" enctype="multipart/form-data" id="encuesta">
       {% csrf_token %}
       {{form.as_p}}
     <input type="submit" value="Adjuntar">

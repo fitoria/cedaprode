@@ -57,7 +57,7 @@ class Adjunto(models.Model):
     archivo = models.FileField(upload_to="adjuntos")
 
     def __unicode__(self):
-        return "Adjunto para %s" self.encuesta
+        return "Adjunto para %s" % self.encuesta
  
 class Categoria(models.Model):
     '''Categoria principal'''

@@ -11,3 +11,4 @@ settings_local.py
 *.swp
 /media/profile/*.*
 /static_media/attachments/
+cedaprode/static_media/adjuntos/

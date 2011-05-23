@@ -5,10 +5,13 @@
 <div  style="padding:15px;">
       <h2 class="left">VER ADJUNTOS</h2>
       <br>
-          {% for adjunto in adjunto%}
-            {{adjunto.nombre}} 
-          {% endfor %}
-         </table>
+      <ul>
+        {% for adjunto in adjuntos%}
+          <li>
+          <a href="{{adjunto.archivo.url}}">{{adjunto.archivo.name}}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
 </div>
 {% endblock %}

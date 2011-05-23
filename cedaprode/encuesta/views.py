@@ -38,7 +38,7 @@ def llenar_encuesta(request, encuesta_id):
     else:
         formset = PreguntaInlineFormSet(instance=encuesta)
     return render_to_response('encuesta/llenar_encuesta.html',
-            {'formset': formset},
+            {'formset': formset, 'encuesta': encuesta.id},
             context_instance=RequestContext(request))
 
 @login_required

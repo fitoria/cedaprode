@@ -25,6 +25,7 @@ def inicio(request):
 def llenar_encuesta(request, encuesta_id):
     encuesta = get_object_or_404(Encuesta, pk = encuesta_id)
     preguntas = Pregunta.objects.all()
+    adjuntos = Adjunto.objects.filter(encuesta__id=encuesta_id)
     PreguntaInlineFormSet = inlineformset_factory(Encuesta, Respuesta,
                                                   form=RespuestaInlineForm,
                                                   can_delete=False,
@@ -38,7 +39,7 @@ def llenar_encuesta(request, encuesta_id):
     else:
         formset = PreguntaInlineFormSet(instance=encuesta)
     return render_to_response('encuesta/llenar_encuesta.html',
-            {'formset': formset, 'encuesta': encuesta.id},
+            {'formset': formset, 'encuesta': encuesta.id,'adjuntos':adjuntos},
             context_instance=RequestContext(request))
 
 @login_required
@@ -95,6 +96,7 @@ def mis_encuestas(request):
 @login_required
 def resultado(request, encuesta_id, template_name):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    adjuntos = Adjunto.objects.filter(encuesta__id=encuesta_id)
     #lista que tendra todos los resultados...
     resultados = []
     for categoria in Categoria.objects.all():
@@ -112,10 +114,10 @@ def resultado(request, encuesta_id, template_name):
         fila['total_maximo'] = len(respuestas) * 5
         resultados.append(fila)
 
-    url_grafo = generar_grafro_general("Consolidado", [(r['puntaje'], (len(r['respuestas']*5))) for r in resultados], 
+    url_grafo = generar_grafro_general("Consolidado", [(r['puntaje'], (len(r['respuestas']*5))) for r in resultados],
                                        [r['categoria'].titulo for r in resultados])
     return render_to_response('encuesta/%s' % template_name,
-                              {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo},
+                              {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo,'adjuntos':adjuntos},
                               context_instance=RequestContext(request))
 @login_required
 def resultados(request):
@@ -132,7 +134,7 @@ def resultados(request):
         form = BuscarResultadoForm()
         encuestas = Encuesta.objects.filter(usuario = request.user)
 
-    return render_to_response('encuesta/resultados.html', 
+    return render_to_response('encuesta/resultados.html',
                               {'encuestas': encuestas, 'form': form},
                               context_instance=RequestContext(request))
 
@@ -153,9 +155,9 @@ def buscar_orgs(request):
         if form.is_valid():
             if form.cleaned_data['tipo'] and form.cleaned_data['municipio']:
                 resultados = Organizacion.objects.filter(tipo = form.cleaned_data['tipo'],municipio = form.cleaned_data['municipio'])
-            elif form.cleaned_data['tipo']: 
+            elif form.cleaned_data['tipo']:
                 resultados = Organizacion.objects.filter(tipo = form.cleaned_data['tipo'])
-            elif form.cleaned_data['municipio']: 
+            elif form.cleaned_data['municipio']:
                 resultados = Organizacion.objects.filter(tipo = form.cleaned_data['municipio'])
 
             return render_to_response('encuesta/buscar_orgs.html',

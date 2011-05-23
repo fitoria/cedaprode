@@ -40,3 +40,9 @@ class BuscarForm(forms.Form):
 class BuscarResultadoForm(forms.Form):
     tipo = forms.ChoiceField(choices = TIPOS_ORG, required=False)
     municipio = forms.ModelChoiceField(queryset = Municipio.objects.all(), required=False)
+
+class AdjuntoForm(forms.ModelForm):
+    encuesta = forms.ModelChoiceField(queryset = Encuesta.objects.all(), widget=forms.HiddenInput)
+
+    class Meta:
+        model = Adjunto

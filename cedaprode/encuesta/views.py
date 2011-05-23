@@ -38,7 +38,7 @@ def llenar_encuesta(request, encuesta_id):
     else:
         formset = PreguntaInlineFormSet(instance=encuesta)
     return render_to_response('encuesta/llenar_encuesta.html',
-            {'formset': formset},
+            {'formset': formset, 'encuesta': encuesta.id},
             context_instance=RequestContext(request))
 
 @login_required
@@ -93,11 +93,10 @@ def mis_encuestas(request):
                               context_instance=RequestContext(request))
 
 @login_required
-def resultado(request, encuesta_id):
+def resultado(request, encuesta_id, template_name):
     encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
     #lista que tendra todos los resultados...
     resultados = []
-    puntajes_consolidados = []
     for categoria in Categoria.objects.all():
         puntaje = Respuesta.objects.filter(encuesta=encuesta,
                                            pregunta__categoria=categoria).aggregate(total=Sum('respuesta__puntaje'))['total']
@@ -115,7 +114,7 @@ def resultado(request, encuesta_id):
 
     url_grafo = generar_grafro_general("Consolidado", [(r['puntaje'], (len(r['respuestas']*5))) for r in resultados], 
                                        [r['categoria'].titulo for r in resultados])
-    return render_to_response('encuesta/resultado.html',
+    return render_to_response('encuesta/%s' % template_name,
                               {'encuesta': encuesta, 'resultados': resultados, 'url_grafo': url_grafo},
                               context_instance=RequestContext(request))
 @login_required
@@ -167,3 +166,30 @@ def buscar_orgs(request):
         return render_to_response('encuesta/buscar_orgs.html',
                           {'form': form},
                           context_instance=RequestContext(request))
+
+@login_required
+@checar_permiso
+def adjuntar(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    adjunto =  Adjunto(encuesta = encuesta)
+
+    if request.method == "POST":
+        form  = AdjuntoForm(request.POST, request.FILES, instance=adjunto)
+        if form.is_valid():
+            form.save()
+            return redirect('llenar-encuesta', encuesta_id=encuesta.id)
+    else:
+        form  = AdjuntoForm(instance=adjunto)
+
+    return render_to_response('encuesta/adjuntar.html',
+                      {'form': form},
+                      context_instance=RequestContext(request))
+
+@login_required
+def ver_adjuntos(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    adjuntos =  Adjunto.objects.filter(encuesta = encuesta)
+
+    return render_to_response('encuesta/ver_adjuntos.html',
+                      {'adjuntos': adjuntos},
+                      context_instance=RequestContext(request))

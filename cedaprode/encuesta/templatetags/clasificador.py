@@ -5,7 +5,11 @@ from django.conf import settings
 @register.filter
 def clasificador(value):
     base_url = '%s%s/' % (settings.MEDIA_URL, 'imagen')
-    if value <= 108:
+    if value <= 36:
+       return base_url + 'rojo.png'
+    elif value <= 72:
+       return base_url + 'naranja.png'
+    elif value <= 108:
        return base_url + 'amarillo.png'
     elif value <= 144:
        return base_url + 'verde.png'

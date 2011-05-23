@@ -1,32 +1,9 @@
-{%extends "base2.html"%}
+{%extends "base_imprimir.html"%}
 {%load truncador%}
 {%block title%}Resultado{%endblock%}
-{%block extra_head%}
-    <link href="/files/css/jquery-ui-1.8.12.custom.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/files/css/vtip.css" rel="stylesheet" type="text/css" media="screen" />
-    <script type="text/javascript" src="/files/js/jquery-ui-1.8.12.custom.min.js"></script>
-    <script type="text/javascript" src="/files/js/vtip-min.js"></script>
-
-        <script type="text/javascript">
-            $(function(){
-
-                // Tabs
-                $('#tabs').tabs();
-                $('#grafos').tabs();
-
-                //hover states on the static widgets
-                $('#dialog_link, ul#icons li').hover(
-                    function() { $(this).addClass('ui-state-hover'); },
-                    function() { $(this).removeClass('ui-state-hover'); }
-                );
-
-            });
-        </script>
-{%endblock%}
 {% block content %}
 <div  style="padding:15px;">
   <h2 class="left"> RESULTADO DE LA EVALUACION</h2>
-  <a href="{% url imprimir encuesta.id %}"><img class="der"src="/files/imagen/imprimir.jpg"></a>
   <div class="separador"></div>
   <div id="tabladescrip">
       <table border="0">
@@ -53,12 +30,6 @@
       </table>
   </div>
     <div id="tabs">
-      <ul>
-        <li><a class="algo" href="#tabs-consolidado">Consolidado</a></li>
-      {%for fila in resultados%}
-        <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria.titulo|truncador:"2"}}</a></li>
-      {%endfor%}
-    </ul>
         <script type="text/javascript">
         $(document).ready(function(){
         $('.algo').text( ('.algo').text().replace('.', '') );
@@ -98,10 +69,6 @@
             </table>
             </div>
               <div id="grafos">
-              <ul>
-                <li><a class="algo" href="#grafo-consolidado-radar">Consolidado Radar</a></li>
-                <li><a class="algo" href="#grafo-consolidado-barra">Consolidado Barra</a></li>
-              </ul>
                   <div id="grafo-consolidado-radar" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.radar}}" /></center>*Este gráfico está normalizado</div>
                   <div id="grafo-consolidado-barra" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.barra}}" /></center></div>
         </div>

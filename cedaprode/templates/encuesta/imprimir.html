@@ -1,6 +1,77 @@
 {%extends "base_imprimir.html"%}
 {%load truncador%}
 {%block title%}Resultado{%endblock%}
+{%block extra_head%}
+<script type="text/javascript" src="/files/js/highcharts.js"></script>
+    <script type="text/javascript" src="/files/js/exporting_patched.js"></script>
+        <script type="text/javascript">
+            var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'highchart',
+         defaultSeriesType: 'bar',
+         width: 650,
+         height: 450,
+      },
+      exporting: {
+        enabled: false
+      },
+      title: {
+         text: 'Consolidado'
+      },
+      xAxis: {
+         //preguntas
+         categories: [{%for legend in url_grafo.barra.legends%} '{{legend}}',{%endfor%}]  
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Puntaje total'
+         }
+      },
+      legend: {
+         //backgroundColor: Highcharts.theme.legendBackgroundColorSolid || '#FFFFFF',
+         reversed: true
+      },
+      tooltip: {
+        enabled: false 
+      },
+      plotOptions: {
+         series: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true,
+                align: 'center',
+                color: '#000',
+                formatter: function() {
+                  if (this.series.name == 'Puntaje total'){
+                    return '' + this.point.stackTotal;
+                  }else {
+                    return ''+ this.y;
+                  }
+                 },
+                style: {
+                    font: '12px Trebuchet MS, Verdana, sans-serif'
+                }
+            }
+
+         }
+      },
+         series: [{ //puntajes
+         name: 'Puntaje total',
+         data: {{url_grafo.barra.data.1}}
+      }, {
+         name: 'Puntaje Obtenido',
+         data: {{url_grafo.barra.data.0}}
+      }]
+   });
+   
+   
+});
+        </script>
+
+{%endblock%}
 {% block content %}
 <div  style="padding:15px;">
   <h2 class="left"> RESULTADO DE LA EVALUACION</h2>
@@ -30,11 +101,6 @@
       </table>
   </div>
     <div id="tabs">
-        <script type="text/javascript">
-        $(document).ready(function(){
-        $('.algo').text( ('.algo').text().replace('.', '') );
-        });
-        </script>
     {%for fila in resultados%}
         <div id="tabs-{{fila.categoria.id}}">
             <b style="font-size:16px;">{{fila.categoria}}</b><br><br>
@@ -70,6 +136,9 @@
             </div>
               <div id="grafos">
                   <div id="grafo-consolidado-radar" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.radar}}" /></center>*Este gráfico está normalizado</div>
+                  <div id="grafo-consolidado-barra" style="width:100%; background:#fff;"><br><center>
+                  <div id="highchart"></div> 
+                  </center></div>
         </div>
     </div>
 </div>

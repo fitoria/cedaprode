@@ -121,11 +121,6 @@ $(document).ready(function() {
         <li><a class="algo" href="#tabs-{{fila.categoria.id}}">{{fila.categoria.titulo|truncador:"2"}}</a></li>
       {%endfor%}
     </ul>
-        <script type="text/javascript">
-        $(document).ready(function(){
-        $('.algo').text( ('.algo').text().replace('.', '') );
-        });
-        </script>
     {%for fila in resultados%}
         <div id="tabs-{{fila.categoria.id}}">
             <b style="font-size:16px;">{{fila.categoria}}</b><br><br>

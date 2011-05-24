@@ -1,0 +1,22 @@
+{%extends "base2.html"%}
+{%load clasificador %}
+{%block title%}Ayuda{%endblock%}
+{%block extra_head%}
+  <script type="text/javascript" src="/files/js/jwplayer.js"></script>
+  <script type"text/javascript">
+    /*jwplayer("video").setup({
+      flashplayer: "/files/js/player.swf",
+      file: "path al video",
+      height: 480,
+      width: 640,
+    });*/
+  </script>
+{%endblock%}
+{%block content%}
+<div  style="padding:15px;">
+    <h2 class="left">Ayuda</h2>
+    <br>
+    <div id="video">Cargando el video</div>
+    <div class="separador"></div>
+</div>
+{%endblock%}

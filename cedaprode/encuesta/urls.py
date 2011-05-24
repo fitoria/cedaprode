@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic import ListView, DetailView
+from django.views.generic.simple import direct_to_template
 from models import Organizacion
-
 
 urlpatterns = patterns('encuesta.views',
             url(r'^mis-encuestas/$', 'mis_encuestas', name='mis-encuestas'),
@@ -24,5 +24,6 @@ urlpatterns = patterns('encuesta.views',
             url(r'^buscar-orgs/$', 'buscar_orgs', name='buscar-orgs'),
             url(r'^resultados/$', 'resultados', name='resultados'),
             url(r'^inicio/$', 'inicio', name='inicio'),
+            url(r'^ayuda/$', direct_to_template, {'template': 'encuesta/ayuda.html'}, name='ayuda'),
             url(r'^$', 'index'),
             )

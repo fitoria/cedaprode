@@ -3,20 +3,18 @@
 {%block title%}Ayuda{%endblock%}
 {%block extra_head%}
   <script type="text/javascript" src="/files/js/jwplayer.js"></script>
-  <script type"text/javascript">
-    /*jwplayer("video").setup({
-      flashplayer: "/files/js/player.swf",
-      file: "path al video",
-      height: 480,
-      width: 640,
-    });*/
-  </script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js"></script>
 {%endblock%}
 {%block content%}
 <div  style="padding:15px;">
     <h2 class="left">Ayuda</h2>
     <br>
-    <div id="video">Cargando el video</div>
+    <object width="670" height="500" id="movie"
+    type="application/x-shockwave-flash"
+    data="/files/js/player.swf">
+<param name="movie" value="/files/js/player.swf"/>
+<param name="flashvars" value="file=/files/video.flv" />
+</object>
     <div class="separador"></div>
 </div>
 {%endblock%}

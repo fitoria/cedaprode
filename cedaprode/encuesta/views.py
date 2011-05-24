@@ -195,3 +195,10 @@ def ver_adjuntos(request, encuesta_id):
     return render_to_response('encuesta/ver_adjuntos.html',
                       {'adjuntos': adjuntos},
                       context_instance=RequestContext(request))
+
+@login_required
+@checar_permiso
+def eliminar_encuesta(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    encuesta.delete()
+    return redirect('resultados')

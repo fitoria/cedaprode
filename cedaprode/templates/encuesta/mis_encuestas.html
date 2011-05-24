@@ -21,7 +21,7 @@
           <tr>
           <td>{{ item.fecha }}</td>
           <td> <img src="{{ item.puntaje|clasificador }}"/> {{item.puntaje}} / 180 </td>
-          <td><a href="{% url resultado item.id %}">Ver</a> | <a href="{% url llenar-encuesta item.id %}">Editar</a></td>
+          <td><a href="{% url resultado item.id %}">Ver</a> | <a href="{% url llenar-encuesta item.id %}">Editar</a> | <a href="{% url eliminar item.id %}">Eliminar</a></td>
           </tr>
           {% endfor %}
          </table>

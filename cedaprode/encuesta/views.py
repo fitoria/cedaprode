@@ -34,6 +34,7 @@ def llenar_encuesta(request, encuesta_id):
         formset = PreguntaInlineFormSet(request.POST, request.FILES, instance = encuesta)
         if formset.is_valid():
             formset.save()
+            return redirect('mis-encuestas')
         else:
             formset = PreguntaInlineFormSet(request.POST, instance = encuesta)
     else:

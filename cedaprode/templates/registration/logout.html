@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{%load url from future%}
+
+{% block content %}
+<div class="margen">
+
+<div class="titulo-general">CERRAR SESIÓN</div>
+
+Sesión terminada <a href="{% url 'user-login' %}">Iniciar sesión de nuevo</a>
+</div>
+
+{% endblock %}

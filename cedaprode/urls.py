@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='user-login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='user-logout'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'registration/logout.html'}, name='user-logout'),
     url(r'^', include('cedaprode.encuesta.urls')),
 )
 

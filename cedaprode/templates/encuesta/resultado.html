@@ -35,8 +35,8 @@ $(document).ready(function() {
       },
       xAxis: {
          //preguntas
-         categories: [{%for legend in url_grafo.barra.legends%} '{{legend}}',{%endfor%}]  
-         //categories: ['la puta madre','acción 10'] 
+         categories: [{%for legend in url_grafo.barra.legends%} '{{legend}}',{%endfor%}]
+         //categories: ['la puta madre','acción 10']
       },
       yAxis: {
          min: 0,
@@ -49,7 +49,7 @@ $(document).ready(function() {
          reversed: true
       },
       tooltip: {
-        enabled: false 
+        enabled: false
       },
       plotOptions: {
          series: {
@@ -80,8 +80,8 @@ $(document).ready(function() {
          data: {{url_grafo.barra.data.0}}
       }]
    });
-   
-   
+
+
 });
         </script>
 {%endblock%}
@@ -115,7 +115,7 @@ $(document).ready(function() {
         {%if adjuntos %}
         <tr>
           <td><b>DOCUMENTOS ADJUNTOS</b></td>
-          <td>{%for adjunto in adjuntos%}<a href="{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
+          <td>{%for adjunto in adjuntos%}<a href="/files/{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
         </tr>
         {%endif%}
       </table>
@@ -167,7 +167,7 @@ $(document).ready(function() {
               </ul>
                   <div id="grafo-consolidado-radar" style="width:100%; background:#fff;"><br><center><img src="{{url_grafo.radar}}" /></center>*Este gráfico está normalizado</div>
                   <div id="grafo-consolidado-barra" style="width:100%; background:#fff;"><br><center>
-                  <div id="highchart"></div> 
+                  <div id="highchart"></div>
                   </center></div>
         </div>
     </div>

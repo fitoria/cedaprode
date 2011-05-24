@@ -2,11 +2,18 @@
 {% load clasificador%}
 {%block title%}Mis Encuestas{%endblock%}
 {% block content %}
+<script type="text/javascript">
+function showAlert(id) {
+    var respuesta = confirm ("Estas completamente seguro de borrar esta evaluación, este registro no podra recuperarse en un futuro")
+    if (respuesta)
+    window.location="/resultado/"+id+"/eliminar"
+}
+</script>
 <div style="padding:15px;">
     <h1><a href="{% url crear-encuesta%}"><img class="der" src="/files/imagen/nuev.jpg"></a></h1>
     <h2 class="left"><img src="/files/imagen/survey.png"> MIS EVALUACIONES</h2>
     <div class="separador"><br></div>
-    <img src="/files/imagen/rojo.png"/> = Deficiente<img src="/files/imagen/naranja.png"/> = Algo<img src="/files/imagen/amarillo.png"/> = Regular <img src="/files/imagen/verde.png"/> = Bueno <img src="/files/imagen/azul.png"/> = Excelente 
+    <img src="/files/imagen/rojo.png"/> = Deficiente<img src="/files/imagen/naranja.png"/> = Malo <img src="/files/imagen/amarillo.png"/> = Regular <img src="/files/imagen/verde.png"/> = Bueno <img src="/files/imagen/azul.png"/> = Excelente
     <div class="tabla">
         {% regroup encuestas by organizacion as encuestas_list %}
         {% for encuesta in encuestas_list%}
@@ -21,7 +28,7 @@
           <tr>
           <td>{{ item.fecha }}</td>
           <td> <img src="{{ item.puntaje|clasificador }}"/> {{item.puntaje}} / 180 </td>
-          <td><a href="{% url resultado item.id %}">Ver</a> | <a href="{% url llenar-encuesta item.id %}">Editar</a> | <a href="{% url eliminar item.id %}">Eliminar</a></td>
+          <td><a href="{% url resultado item.id %}">Ver</a> | <a href="{% url llenar-encuesta item.id %}">Editar</a> | <a href="#" onClick="showAlert({{item.id }})">Eliminar</a></td>
           </tr>
           {% endfor %}
          </table>

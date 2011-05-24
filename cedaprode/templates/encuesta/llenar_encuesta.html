@@ -29,7 +29,7 @@
       <div id="tabladescrip">
           <table border="0">
               <td><b>DOCUMENTOS ADJUNTOS</b></td>
-              <td>{%for adjunto in adjuntos%}<a href="{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
+              <td>{%for adjunto in adjuntos%}<a href="/files/{{adjunto.archivo}}">{{adjunto.archivo.name}}</a><br>{%endfor%}</td>
             </tr>
           </table>
       </div>

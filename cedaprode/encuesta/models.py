@@ -7,17 +7,17 @@ from django.db.models import Sum
 from lugar.models import Municipio
 
 TIPOS_ORG = (('1', 'Alcaldía'), ('2', 'Sociedad civil'),
-            ('3', 'Gremios'), ('4', 'Instituciones del estado'), 
+            ('3', 'Gremios'), ('4', 'Instituciones del estado'),
             ('5', 'Empresa'))
 
 class Organizacion(models.Model):
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=2, choices = TIPOS_ORG)
-    descripcion = models.TextField() 
+    descripcion = models.TextField()
     creado_por = models.ForeignKey(User)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     municipio = models.ForeignKey(Municipio)
-    #logo = ImageWithThumbsField(upload_to = 'logos', sizes = ((100, 100))) 
+    #logo = ImageWithThumbsField(upload_to = 'logos', sizes = ((100, 100)))
 
     class Meta:
         verbose_name_plural = 'Organizaciones'
@@ -26,7 +26,7 @@ class Organizacion(models.Model):
     def __unicode__(self):
         return self.nombre
 
-   
+
 class Encuesta(models.Model):
     organizacion = models.ForeignKey(Organizacion)
     fecha = models.DateTimeField(auto_now_add = True)
@@ -44,11 +44,11 @@ class Encuesta(models.Model):
 
     def __unicode__(self):
         return 'Encuesta a %s con fecha %s' % (self.organizacion.nombre, self.fecha)
-    
+
     def puntaje(self):
         puntos = Respuesta.objects.filter(encuesta = self).aggregate(p=Sum('respuesta__puntaje'))['p']
         if puntos:
-            return puntos 
+            return puntos
         else:
             return 0
 
@@ -58,7 +58,7 @@ class Adjunto(models.Model):
 
     def __unicode__(self):
         return "Adjunto para %s" % self.encuesta
- 
+
 class Categoria(models.Model):
     '''Categoria principal'''
     titulo = models.CharField(max_length=200)
@@ -97,13 +97,13 @@ class Respuesta(models.Model):
 
     class Meta:
         unique_together = ['encuesta', 'pregunta']
-        ordering = ['pregunta__categoria']
+        ordering = ['pregunta__categoria', 'pregunta__id']
 
     def __unicode__(self):
         if self.respuesta:
-            return '%s - %s(%s)' % (self.pregunta.titulo, 
-                    self.respuesta.titulo, 
+            return '%s - %s(%s)' % (self.pregunta.titulo,
+                    self.respuesta.titulo,
                     self.encuesta.usuario.username)
         else:
-            return '%s - Sin responder(%s)' % (self.pregunta.titulo, 
+            return '%s - Sin responder(%s)' % (self.pregunta.titulo,
                     self.encuesta.usuario.username)
